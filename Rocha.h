@@ -20,5 +20,12 @@ void setpeso(Trocha *rocha, float peso);
 void setcategoria(Trocha *rocha, int identificador);
 void setlocalização(Trocha *rocha, float latitude, float longitude);
 
+Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude);
+
+int getIdentificador(Trocha* rocha);
+float getpeso(Trocha* rocha);
+char* getcategoria(Trocha* rocha);
+float getlatitude(Trocha* rocha);
+float getlongitude(Trocha* rocha);
 
 #endif

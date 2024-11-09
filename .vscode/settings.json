@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "L_Rochas.C": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "rocha.h": "c"
     }
 }
