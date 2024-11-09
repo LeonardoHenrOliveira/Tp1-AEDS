@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Minerais.c"
+#include "Minerais.h"
 #define MAXTAM 5
 #define INICIO 0
 
