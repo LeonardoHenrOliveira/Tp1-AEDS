@@ -2,5 +2,5 @@
 
 typedef int tiporocha;
 typedef struct {
-    tiporocha rocha
+    tiporocha rocha;
 }Trocha;
