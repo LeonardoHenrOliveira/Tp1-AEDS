@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Rochas.h"
+#include "Rocha.h"
 
 typedef struct celula{
     Trocha rocha;

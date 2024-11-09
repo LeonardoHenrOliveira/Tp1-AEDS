@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "L_Rochas.h"
-#include "Rochas.h"
+#include "Rocha.h"
 
 void FLVazia(TLista *pLista){
     pLista->pPrimeiro = (Apontador) malloc(sizeof(Tcelula));

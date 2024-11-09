@@ -3,8 +3,7 @@
 #define MAXTAM 5
 #define INICIO 0
 
-typedef struct 
-{
+typedef struct {
     Minerais item[MAXTAM];
     int primeiro;
     int ultimo;
