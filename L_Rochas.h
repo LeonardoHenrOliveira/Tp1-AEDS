@@ -1,3 +1,5 @@
+#ifndef L_ROCHAS_H
+#define L_ROCHAS_H
 #include <stdio.h>
 #include "Rocha.h"
 
@@ -18,3 +20,5 @@ int LEHVazia(TLista* pLista);
 int LInsere(TLista* pLista, Trocha* pRocha );
 int LRetita(TLista* pLista, Trocha* pRocha);
 void LImprime(TLista* pLista);
+
+#endif

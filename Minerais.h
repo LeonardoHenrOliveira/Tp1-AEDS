@@ -1,3 +1,7 @@
+#ifndef MINERAIS_H
+#define MINERAIS_H
+
+
 #include <stdio.h>
 #define tamanhomaxnome 100
 #define tamanhomaxcor 100
@@ -20,3 +24,5 @@ char* getNome(Minerais* minerais);
 int getDureza(Minerais* minerais);
 int getReatividade(Minerais* minerais);
 char* getCor(Minerais* minerais);
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef ROCHA_H
+#define ROCHA_H
 #include <stdio.h>
 #include "L_Minerais.h"
 
@@ -14,3 +16,4 @@ typedef struct {
     
 }Trocha;
 
+#endif

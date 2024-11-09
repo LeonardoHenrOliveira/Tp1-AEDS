@@ -1,3 +1,6 @@
+#ifndef L_MINERAIS_H
+#define L_MINERAIS_H
+
 #include <stdio.h>
 #include "Minerais.h"
 #define MAXTAM 5
@@ -16,3 +19,5 @@ int Lretira(L_Minerais* lista_m, int p, Minerais *px);
 void LImprime(L_Minerais* lista_m);
 
 void PreencheMinerais(L_Minerais* lista_m, Minerais* mineral);
+
+#endif
