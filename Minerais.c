@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <string.h>
-#include <Minerais.h>
+#include "Minerais.h"
 
-void Inicializar(Minerais* minerais, char* nome, float dureza, float reatividade, char* cor){
+Minerais InicializarMineral(Minerais* minerais, char* nome, float dureza, float reatividade, char* cor){
+    
     setNome(minerais, nome);
     setDureza(minerais, dureza);
     setReatividade(minerais, reatividade);
     setCor(minerais, cor);
+
+    return *minerais;
 }
 
 void setNome(Minerais* minerais, char* nome){
@@ -26,19 +29,19 @@ void setCor(Minerais* minerais, char* cor){
 };
 
 
-int getNome(Minerais* minerais, char* nome){
+char* getNome(Minerais* minerais){
     return(minerais->Nome);
 }
 
-int getDureza(Minerais* minerais, float dureza){
+int getDureza(Minerais* minerais){
     return(minerais->Dureza);
 }
 
-int getReatividade(Minerais* minerais, float reatividade){
+int getReatividade(Minerais* minerais){
     return(minerais->Reatividade);
 }
 
-int getCor(Minerais* minerais, char* cor){
+char* getCor(Minerais* minerais){
     return(minerais->Cor);
 }
 
