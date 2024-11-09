@@ -5,12 +5,20 @@
 
 typedef int tiporocha;
 typedef struct {
-    char identificador[100];
+    int identificador;
     float peso;
+    char categoria[100];
+
     tiporocha rocha;
-    int latitude;
-    int longitude;
+    float latitude;
+    float longitude;
     
 }Trocha;
+
+void setIdentificador(Trocha *rocha, int identificador);
+void setpeso(Trocha *rocha, float peso);
+void setcategoria(Trocha *rocha, int identificador);
+void setlocalização(Trocha *rocha, float latitude, float longitude);
+
 
 #endif

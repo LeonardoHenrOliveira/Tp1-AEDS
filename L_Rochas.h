@@ -7,6 +7,7 @@ typedef struct celula{
     Trocha rocha;
     struct celula* pProx;
 }Tcelula;
+
 typedef struct Celula* Apontador;
 typedef struct lista {
     Apontador pPrimeiro;
