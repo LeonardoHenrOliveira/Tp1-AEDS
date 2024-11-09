@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "Menu.h"
 
 void printquntdsondas(){
     printf("digite a quantidade de sondas que irão para Marte\n");

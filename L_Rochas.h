@@ -8,7 +8,7 @@ typedef struct celula{
     struct celula* pProx;
 }Tcelula;
 typedef struct Celula* Apontador;
-typedef struct {
+typedef struct lista {
     Apontador pPrimeiro;
     Apontador pUltimo;   
     struct celula* pProx;
