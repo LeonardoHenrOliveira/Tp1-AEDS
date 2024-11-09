@@ -4,5 +4,6 @@
 void printquntdsondas();
 void printmenu();
 void printquntdoperacoes();
+void printRochanova();
 
 #endif

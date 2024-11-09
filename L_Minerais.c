@@ -55,6 +55,4 @@ void PreencheMinerais(L_Minerais* lista_m, Minerais* mineral){
     LInsere(lista_m, Aquavitae);
     LInsere(lista_m, Terranita);
     LInsere(lista_m, Calaris);
-
-    LImprime(lista_m);
 }

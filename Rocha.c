@@ -16,12 +16,14 @@ void SetPeso(Trocha *rocha, float peso){
     rocha->peso=peso;
 }
 void SetCategoria(Trocha *rocha, int identificador){
-
+    
 }
 void SetLocalização(Trocha *rocha, float latitude, float longitude){
     rocha->latitude=latitude;
     rocha->longitude=longitude;
 }
+
+
 int getIdentificador(Trocha* rocha){
     return(rocha->identificador);
 }

@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "L_Rochas.h"
+#include "compartimento.h"
 #include "Rocha.h"
 
 void FLVazia(TLista *pLista){
     pLista->pPrimeiro = (Apontador) malloc(sizeof(Tcelula));
     pLista->pUltimo = pLista->pPrimeiro;
     pLista->pPrimeiro->pProx = NULL;
-}
+} 
 int LEHVazia(TLista* pLista){
     return(pLista->pPrimeiro == pLista->pUltimo);
 }

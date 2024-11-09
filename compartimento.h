@@ -8,15 +8,14 @@ typedef struct celula{
     struct celula* pProx;
 }Tcelula;
 
-typedef struct Celula* Apontador;
-typedef struct lista {
+typedef struct celula* Apontador;
+typedef struct  {
     Apontador pPrimeiro;
     Apontador pUltimo;   
-    struct celula* pProx;
 }TLista;
 
 
-void FLVazia(TLista* pLista, Tcelula* pcelula);
+void FLVazia(TLista* pLista);
 int LEHVazia(TLista* pLista);
 int LInsere(TLista* pLista, Trocha* pRocha );
 int LRetita(TLista* pLista, Trocha* pRocha);
