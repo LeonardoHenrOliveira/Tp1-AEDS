@@ -34,5 +34,6 @@ void LImprime(L_Minerais* lista_m){
     for (i = lista_m->primeiro; i < lista_m->ultimo; i++){
         printf("%d\n", lista_m->item[i].Mine);
     }
-    
 };
+
+

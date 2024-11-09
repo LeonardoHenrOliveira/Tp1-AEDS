@@ -3,15 +3,20 @@
 
 typedef struct Minerais
 {
-    char nome[100];
-    float dureza;
+    char Nome[100];
+    float Dureza;
     float Reatividade;
-    char cor[100];
+    char Cor[100];
 }Minerais;
 
-void Inicializar(Minerais* minerais);
+void Inicializar(Minerais* minerais, char* nome, float dureza, float reatividade, char* cor);
 
 void setNome(Minerais* minerais, char* nome);
 void setDureza(Minerais* minerais, float dureza);
 void setReatividade(Minerais* minerais, float reatividade);
 void setCor(Minerais* minerais, char* cor);
+
+int getNome(Minerais* minerais, char* nome);
+int getDureza(Minerais* minerais, float dureza);
+int getReatividade(Minerais* minerais, float reatividade);
+int getCor(Minerais* minerais, char* cor);
