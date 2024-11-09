@@ -1,12 +1,12 @@
 #include <stdio.h>
-
-
+#define tamanhomaxnome 100
+#define tamanhomaxcor 100
 typedef struct Minerais
 {
-    char Nome[100];
+    char Nome[tamanhomaxnome];
     float Dureza;
     float Reatividade;
-    char Cor[100];
+    char Cor[tamanhomaxcor];
 }Minerais;
 
 Minerais InicializarMineral(Minerais* minerais, char* nome, float dureza, float reatividade, char* cor);
