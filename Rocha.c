@@ -1,30 +1,39 @@
 #include <stdio.h>
-#include <Rocha.h>
+#include "Rocha.h"
 
 Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude){
 
-    SetIdentificador(rocha, identificador);
-    SetLocalização(rocha, latitude, longitude);
-    SetPeso(rocha, peso);
+    setidentificador(rocha, identificador);
+    setlocalizacao(rocha, latitude, longitude);
+    setpeso(rocha, peso);
 }
+char* classifica_categoria(char* mineral1, char*mineral2,char* mineral3, int j){
+    if (j==4){
+       return "Aquacalis";
+    }if(j==2){
 
-void SetIdentificador(Trocha *rocha, int identificador){
+
+    }if (j==1){
+        
+    }
+}
+void setidentificador(Trocha *rocha, int identificador){
     rocha->identificador=identificador;
 }
 
-void SetPeso(Trocha *rocha, float peso){
+void setpeso(Trocha *rocha, float peso){
     rocha->peso=peso;
 }
-void SetCategoria(Trocha *rocha, int identificador){
+void setcategoria(Trocha *rocha, char* categoria){
     
 }
-void SetLocalização(Trocha *rocha, float latitude, float longitude){
+void setlocalizacao(Trocha *rocha, float latitude, float longitude){
     rocha->latitude=latitude;
     rocha->longitude=longitude;
 }
 
 
-int getIdentificador(Trocha* rocha){
+int getidentificador(Trocha* rocha){
     return(rocha->identificador);
 }
 float getpeso(Trocha* rocha){
