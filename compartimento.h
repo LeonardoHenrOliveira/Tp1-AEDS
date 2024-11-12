@@ -18,7 +18,7 @@ typedef struct  {
 void FLVazia(TLista* pLista);
 int LEHVazia(TLista* pLista);
 int LInsere(TLista* pLista, Trocha* pRocha );
-int LRetita(TLista* pLista, Trocha* pRocha);
+int LRetira(TLista* pLista, Trocha* pRocha);
 void LImprime(TLista* pLista);
 
 #endif

@@ -16,7 +16,7 @@ int Desliga(TSonda* sonda);
 void Move(TSonda* sonda, int latitude, int longitude);
 
 void setId(TSonda* sonda, int id);
-void setCompartimento(TSonda* sonda, TLista* lista_r);
+TLista setCompartimento(TSonda* sonda, TLista* lista_r);
 void setLatitude(TSonda* sonda, int latitude);
 void setLongitude(TSonda* sonda, int longitude);
 

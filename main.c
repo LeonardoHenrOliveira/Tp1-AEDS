@@ -5,8 +5,10 @@
 #include "Menu.h"
 
 int main() {
-    int quntdsondas, quntdoperacoes, i,operacao,peso,nome1[100],nome2[100],nome3[100];
-    char f;
+    int quntdsondas, quntdoperacoes, i,operacao,peso, contador=0;
+    char entrada[200], mineral[3];
+    const char s[2]= " ";
+    char*token;
     float latitude, longitude;
     L_Minerais lista_m;
     Minerais minerais;
@@ -21,15 +23,22 @@ int main() {
         scanf("%d",&operacao);
         if (operacao==1){
             printRochanova();
-            scanf("%f %f %d %s %s %s",&latitude,&longitude,&peso,&nome1,&nome2,&nome3);
+            getchar();
+            fgets(entrada, 200, stdin);
+            token = strtok(entrada,s);
+            latitude=atof(token);
+            token = strtok(NULL,s);
+            longitude= atof(token);
+            token = strtok(NULL, s);
+            peso=atoi(token);
+            while( token != NULL ) {
+                token = strtok(NULL, s);
+                
+            }
+            
         }
         if (operacao==2){
-            printf("%f\n",latitude);
-            printf("%f\n",longitude);
-            printf("%d\n",peso);
-            printf("%s\n",nome1);
-            printf("%s\n",nome2);
-            printf("%s\n",nome3);
+            
         }
         if (operacao==3){
 

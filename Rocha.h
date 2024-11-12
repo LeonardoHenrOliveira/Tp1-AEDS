@@ -8,7 +8,6 @@ typedef struct {
     int identificador;
     float peso;
     char categoria[100];
-
     tiporocha rocha;
     float latitude;
     float longitude;
@@ -18,7 +17,7 @@ typedef struct {
 void setIdentificador(Trocha *rocha, int identificador);
 void setpeso(Trocha *rocha, float peso);
 void setcategoria(Trocha *rocha, int identificador);
-void setlocalização(Trocha *rocha, float latitude, float longitude);
+void setlocalizacao(Trocha *rocha, float latitude, float longitude);
 
 Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude);
 
