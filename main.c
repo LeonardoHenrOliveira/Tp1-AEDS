@@ -7,7 +7,7 @@
 
 int main() {
     int quntdsondas, quntdoperacoes, i,operacao,peso, contador=0,j=0;
-    char entrada[200];
+    char entrada[255];
     const char s[2]= " ";
     char*token,mineral1[20],mineral2[20],mineral3[20], categoria[20];
     float latitude, longitude;
@@ -25,14 +25,14 @@ int main() {
         if (operacao==1){
             printRochanova();
             getchar();
-            fgets(entrada, 200, stdin);
+            fgets(entrada, 255, stdin);
             token = strtok(entrada,s);
             latitude=atof(token);
             token = strtok(NULL,s);
             longitude= atof(token);
             token = strtok(NULL, s);
             peso=atoi(token);
-            while( token != NULL ) {
+            while( token!= NULL ) {
                 token = strtok(NULL,s);
                 if (j==0){
                     strcpy(mineral1, token);

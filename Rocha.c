@@ -8,6 +8,9 @@ Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latit
     setpeso(rocha, peso);
 }
 char* classifica_categoria(char* mineral1, char*mineral2,char* mineral3, int j){
+    printf("%s\n",mineral1);
+    printf("%s\n",mineral2);
+    printf("%s\n",mineral3);
     if (j==4){
        return "Aquacalis";
     }if(j==2){
