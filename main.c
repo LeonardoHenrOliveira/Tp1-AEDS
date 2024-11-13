@@ -13,8 +13,12 @@ int main() {
     float latitude, longitude;
     L_Minerais lista_m;
     Minerais minerais;
+    Trocha lrocha;
+    entradaminerais* entradam;
+    L_entrada* listae;
 
     PreencheMinerais(&lista_m, &minerais);
+    FLvaziae(listae);
     printquntdsondas();
     scanf("%d",&quntdsondas);
     printquntdoperacoes();
@@ -34,18 +38,12 @@ int main() {
             peso=atoi(token);
             while( token!= NULL ) {
                 token = strtok(NULL,s);
-                if (j==0){
-                    strcpy(mineral1, token);
-                }if (j==1){
-                    strcpy(mineral2, token);
-                }if (j==2){
-                    strcpy(mineral3, token);
-                }
-               j++;
+                InicializarMinerale(entradam,token);
+                LInseree(listae,token);
             }
-            printf("%d\n",j);
-            strcpy(categoria,classifica_categoria(mineral1,mineral2,mineral3,j));
-            printf("%s",categoria);
+            for (j=0;j<3;j++){
+                printf("%s",listae->iteme[j]);
+            }
         }
         if (operacao==2){
            

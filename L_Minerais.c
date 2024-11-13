@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include "L_Minerais.h"
 
+void FLvaziae(L_entrada* lista_e){
+    lista_e->primeiroe = INICIO;
+    lista_e->ultimoe = lista_e->primeiroe;
+}
+int LInseree(L_entrada* lista_e, char* y){
+    if(lista_e->ultimoe == MAXTAM)
+        return 0;
+    lista_e->iteme[lista_e->ultimoe++] = y;
+    return 1;
+};
+
+
 void FLvazia(L_Minerais* lista_m){
     lista_m->primeiro = INICIO;
     lista_m->ultimo = lista_m->primeiro;
@@ -42,7 +54,6 @@ void LImprime(L_Minerais* lista_m){
 };
 
 void PreencheMinerais(L_Minerais* lista_m, Minerais* mineral){
-
     FLvazia(lista_m);
 
     Minerais Ferrolita = InicializarMineral(mineral, "Ferrolita", 0.5, 0.7, "Cinza");

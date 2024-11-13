@@ -13,7 +13,14 @@ typedef struct Minerais
     char Cor[tamanhomaxcor];
 }Minerais;
 
+typedef struct {
+    char nome[tamanhomaxnome];
+}entradaminerais;
+
 Minerais InicializarMineral(Minerais* minerais, char* nome, float dureza, float reatividade, char* cor);
+
+entradaminerais InicializarMinerale(entradaminerais* entradam, char* nome);
+void setNomee(entradaminerais* entradam, char* nome);
 
 void setNome(Minerais* minerais, char* nome);
 void setDureza(Minerais* minerais, float dureza);

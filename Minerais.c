@@ -11,6 +11,13 @@ Minerais InicializarMineral(Minerais* minerais, char* nome, float dureza, float 
 
     return *minerais;
 }
+entradaminerais InicializarMinerale(entradaminerais* entradam, char* nome){
+    setNomee(entradam,nome);
+    return *entradam;
+}
+void setNomee(entradaminerais* entradam, char* nome){
+    strcpy(entradam->nome, nome);
+};
 
 void setNome(Minerais* minerais, char* nome){
     strcpy(minerais->Nome, nome);
