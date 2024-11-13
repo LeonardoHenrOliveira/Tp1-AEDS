@@ -2,6 +2,7 @@
     "files.associations": {
         "L_Rochas.C": "cpp",
         "stdio.h": "c",
-        "rocha.h": "c"
+        "rocha.h": "c",
+        "l_entradas.h": "c"
     }
 }

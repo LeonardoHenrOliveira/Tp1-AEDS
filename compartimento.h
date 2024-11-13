@@ -3,12 +3,13 @@
 #include <stdio.h>
 #include "Rocha.h"
 
+typedef struct celula* Apontador;
 typedef struct celula{
     Trocha rocha;
     struct celula* pProx;
 }Tcelula;
 
-typedef struct celula* Apontador;
+
 typedef struct  {
     Apontador pPrimeiro;
     Apontador pUltimo;   

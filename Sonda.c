@@ -1,12 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "Sonda.h"
 
-void Inicializar(TSonda* sonda, int id, TLista* compartimento, int latitude, int longitude){
+TSonda Inicializar_sonda(TSonda* sonda, int id, TLista* compartimento, float latitude, float longitude,float capacidade){
     Liga(sonda);
-    setIdentificador(sonda, id);
+    setId(sonda, id);
     setCompartimento(sonda, compartimento);
     setLatitude(sonda, latitude);
     setLongitude(sonda, longitude);
+    setCapacidade(sonda,capacidade);
+    
+
+    return *sonda;
 }
 
 int Liga(TSonda* sonda){
@@ -17,7 +22,7 @@ int Desliga(TSonda* sonda){
     sonda->EstaLigada = 0;
 }
 
-void Move(TSonda* sonda, int latitude, int longitude){
+void Move(TSonda* sonda, float latitude, float longitude){
     setLatitude(sonda, latitude);
     setLongitude(sonda, longitude);
 }
@@ -26,17 +31,21 @@ void setId(TSonda* sonda, int id){
     sonda->Identificador = id;
 }
 
-void setCompartimento(TSonda* sonda, TLista* lista_r){
+TLista setCompartimento(TSonda* sonda, TLista* lista_r){
     sonda->compartimento = lista_r;
 }
 
-void setLatitude(TSonda* sonda, int latitude){
+void setLatitude(TSonda* sonda, float latitude){
     sonda->Latitude = latitude;
 }
 
-void setLongitude(TSonda* sonda, int longitude){
+void setLongitude(TSonda* sonda, float longitude){
     sonda->Longitude = longitude;
 }
+void setCapacidade(TSonda* sonda, float capacidade){
+    sonda->capacidade=capacidade;
+}
+
 
 int getId(TSonda* sonda){
     return sonda->Identificador;

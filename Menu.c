@@ -13,3 +13,6 @@ void printmenu(){
 void printRochanova(){
     printf("escreva as caractericas da nova rocha:\n");
 }
+
+
+    

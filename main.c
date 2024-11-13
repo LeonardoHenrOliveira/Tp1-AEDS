@@ -1,28 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "L_Minerais.h"
 #include "Menu.h"
-#include "Rocha.h"
+
 
 int main() {
-    int quntdsondas, quntdoperacoes, i,operacao,peso, contador=0,j=0;
+    
+    
+    int quntdsondas, quntdoperacoes, i,operacao,peso, contador=0,j=0,k;
     char entrada[255];
     const char s[2]= " ";
-    char*token,mineral1[20],mineral2[20],mineral3[20], categoria[20];
-    float latitude, longitude;
+    char*token, categoria[20];
+    float latitude, longitude,lat_i,long_i,velocidade_i,combustivel_i,capacidade_i;
+
     L_Minerais lista_m;
     Minerais minerais;
+    Lista_s* pLista;
+    TSonda* sonda;
     Trocha lrocha;
     entradaminerais* entradam;
-    L_entrada* listae;
+    TLista* comp;
 
     PreencheMinerais(&lista_m, &minerais);
-    FLvaziae(listae);
     printquntdsondas();
     scanf("%d",&quntdsondas);
+    printf("\n");
+
+    FLVazia_s(pLista);
+    
+    for (k=0;k<quntdsondas;k++){
+        scanf("%f %f %f %f %f",&lat_i, &long_i,&capacidade_i,&velocidade_i,&combustivel_i);
+        printf("LJHADIOU8989890");
+        TSonda sondaN = Inicializar_sonda(sonda,1,comp,lat_i,long_i,capacidade_i);
+        printf("LJHADIOU");
+
+        LInsere_s(pLista, sonda);
+    }
+
     printquntdoperacoes();
     scanf("%d",&quntdoperacoes);
+    
     for (i=0; i<quntdoperacoes; i++){
         printmenu();
         scanf("%d",&operacao);
@@ -36,14 +53,16 @@ int main() {
             longitude= atof(token);
             token = strtok(NULL, s);
             peso=atoi(token);
+            /*
             while( token!= NULL ) {
                 token = strtok(NULL,s);
                 InicializarMinerale(entradam,token);
-                LInseree(listae,token);
+                LInseree(listae,listae->iteme[j]);
+                j++;
             }
             for (j=0;j<3;j++){
                 printf("%s",listae->iteme[j]);
-            }
+            }*/
         }
         if (operacao==2){
            

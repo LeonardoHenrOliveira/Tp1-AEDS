@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "Minerais.h"
+#include "L_Minerais.h"
 
 Minerais InicializarMineral(Minerais* minerais, char* nome, float dureza, float reatividade, char* cor){
     

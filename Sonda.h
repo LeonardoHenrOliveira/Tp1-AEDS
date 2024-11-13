@@ -1,24 +1,27 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "Compartimento.h"
 
 
 typedef struct {
     int Identificador;
     TLista *compartimento;
-    int Latitude;
-    int Longitude;
+    float capacidade;
+    float Latitude;
+    float Longitude;
     int EstaLigada;
 }TSonda;
 
-void Inicializar(TSonda* sonda, int id, TLista* compartimento, int latitude, int longitude);
+TSonda Inicializar_sonda(TSonda* sonda, int id, TLista* compartimento, float latitude, float longitude, float capacidade);
 int Liga(TSonda* sonda);
 int Desliga(TSonda* sonda);
-void Move(TSonda* sonda, int latitude, int longitude);
+void Move(TSonda* sonda, float latitude, float longitude);
 
 void setId(TSonda* sonda, int id);
 TLista setCompartimento(TSonda* sonda, TLista* lista_r);
-void setLatitude(TSonda* sonda, int latitude);
-void setLongitude(TSonda* sonda, int longitude);
+void setLatitude(TSonda* sonda, float latitude);
+void setLongitude(TSonda* sonda, float longitude);
+void setCapacidade(TSonda* sonda, float capacidade);
 
 int getId(TSonda* sonda);
 TLista* getCompartimento(TSonda* sonda);
