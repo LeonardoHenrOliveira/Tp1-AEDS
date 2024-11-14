@@ -10,8 +10,8 @@ typedef struct Celula_s{
 
 
 typedef struct {
-    Apontador_s pPrimeiro;
-    Apontador_s pUltimo;
+    Apontador_s pPrimeiro_s;
+    Apontador_s pUltimo_s;
 }Lista_s;
 
 void FLVazia_s(Lista_s* pLista);

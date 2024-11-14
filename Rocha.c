@@ -9,7 +9,8 @@ Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latit
     setlocalizacao(rocha, latitude, longitude);
     setpeso(rocha, peso);
 }
-/*char* classifica_categoria(char* mineral1, char*mineral2,char* mineral3, int j){
+/*char* class
+ifica_categoria(char* mineral1, char*mineral2,char* mineral3, int j){
     L_Minerais minerios;
     if (j==4){
         if (strcmp(mineral1,'Aquavitae')||strcmp(mineral2,'Aquavitae')||strcmp(mineral3,'Aquavitae')){

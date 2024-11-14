@@ -15,8 +15,8 @@ int main() {
 
     L_Minerais lista_m;
     Minerais minerais;
-    Lista_s* pLista;
-    TSonda* sonda;
+    Lista_s pLista;
+    TSonda sonda;
     Trocha lrocha;
     entradaminerais* entradam;
     TLista* comp;
@@ -26,15 +26,12 @@ int main() {
     scanf("%d",&quntdsondas);
     printf("\n");
 
-    FLVazia_s(pLista);
+    FLVazia_s(&pLista);
     
     for (k=0;k<quntdsondas;k++){
         scanf("%f %f %f %f %f",&lat_i, &long_i,&capacidade_i,&velocidade_i,&combustivel_i);
-        printf("LJHADIOU8989890");
-        TSonda sondaN = Inicializar_sonda(sonda,1,comp,lat_i,long_i,capacidade_i);
-        printf("LJHADIOU");
-
-        LInsere_s(pLista, sonda);
+        TSonda sondaN = Inicializar_sonda(&sonda,1,comp,lat_i,long_i,capacidade_i);
+        LInsere_s(&pLista, &sonda);
     }
 
     printquntdoperacoes();

@@ -4,22 +4,22 @@
 
 void FLVazia_s(Lista_s *lista_sonda){
     printf("1");
-    lista_sonda->pPrimeiro = (Apontador_s)malloc(sizeof(Celula_s));
+    lista_sonda->pPrimeiro_s = (Apontador_s)malloc(sizeof(Celula_s));
     printf("2");
-    lista_sonda->pUltimo = lista_sonda->pPrimeiro;
+    lista_sonda->pUltimo_s = lista_sonda->pPrimeiro_s;
     printf("3");
-    lista_sonda->pPrimeiro->pProx = NULL;
+    lista_sonda->pPrimeiro_s->pProx = NULL;
 } 
 
 int LEHVazia_s(Lista_s* lista_sonda){
-    return(lista_sonda->pPrimeiro == lista_sonda->pUltimo);
+    return(lista_sonda->pPrimeiro_s == lista_sonda->pUltimo_s);
 }
 
 int LInsere_s(Lista_s* lista_sonda, TSonda* sonda ){
-    lista_sonda->pUltimo->pProx = (Celula_s*)malloc(sizeof(Celula_s));
-    lista_sonda->pUltimo = lista_sonda->pUltimo->pProx;
-    lista_sonda->pUltimo->item = *sonda;
-    lista_sonda->pPrimeiro->pProx = NULL;
+    lista_sonda->pUltimo_s->pProx = (Celula_s*)malloc(sizeof(Celula_s));
+    lista_sonda->pUltimo_s = lista_sonda->pUltimo_s->pProx;
+    lista_sonda->pUltimo_s->item = *sonda;
+    lista_sonda->pPrimeiro_s->pProx = NULL;
 }
 
 int LRetira_s(Lista_s* lista_sonda, TSonda* sonda){
@@ -27,16 +27,16 @@ int LRetira_s(Lista_s* lista_sonda, TSonda* sonda){
     if (LEHVazia_s(lista_sonda)){
         return 0;
     }
-    *sonda = lista_sonda->pPrimeiro->pProx->item;
-    pAux = lista_sonda->pPrimeiro;
-    lista_sonda->pPrimeiro = lista_sonda->pPrimeiro->pProx;
+    *sonda = lista_sonda->pPrimeiro_s->pProx->item;
+    pAux = lista_sonda->pPrimeiro_s;
+    lista_sonda->pPrimeiro_s = lista_sonda->pPrimeiro_s->pProx;
     free(pAux);
     return 1;
 }
 /*
 void LImprime_s(Lista_s* lista_sonda){
     Apontador_s pAux;
-    pAux = lista_sonda->pPrimeiro->pProx;
+    pAux = lista_sonda->pPrimeiro_s->pProx;
     while (pAux!=NULL){
         printf("");
     }
