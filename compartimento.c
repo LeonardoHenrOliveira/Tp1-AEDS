@@ -14,7 +14,7 @@ int LInsere(TLista* pLista, Trocha* pRocha ){
     pLista->pUltimo->pProx = (Apontador) malloc(sizeof(Tcelula));
     pLista->pUltimo = pLista->pUltimo->pProx;
     pLista->pUltimo->rocha= *pRocha;
-    pLista->pPrimeiro->pProx = NULL;
+    pLista->pUltimo->pProx = NULL;
 }
 int LRetita(TLista* pLista, Trocha* pRocha){
     Tcelula* pAux;
@@ -32,5 +32,6 @@ void LImprime(TLista* pLista){
     pAux = pLista->pPrimeiro->pProx;
     while (pAux!=NULL){
         printf("");
+        pAux= pAux->pProx;
     }
 }

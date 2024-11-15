@@ -14,7 +14,11 @@ typedef struct {
     Apontador_s pUltimo_s;
 }Lista_s;
 
-void FLVazia_s(Lista_s* pLista);
-int LEHVazia_s(Lista_s* pLista);
-int LInsere_s(Lista_s* pLista, TSonda* sonda );
-int LRetita_s(Lista_s* pLista, TSonda* sonda);
+void FLVazia_s(Lista_s* lista_sonda);
+int LEHVazia_s(Lista_s* lista_sonda);
+int LInsere_s(Lista_s* lista_sonda, TSonda* sonda );
+int LRetita_s(Lista_s* lista_sonda, TSonda* sonda);
+void LImprime_s(Lista_s* lista_sonda);
+
+float MediaSondas(Lista_s* lista_sonda);
+void PosicaoInicial(Lista_s* lista_sonda);

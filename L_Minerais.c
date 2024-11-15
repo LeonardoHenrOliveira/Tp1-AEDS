@@ -2,6 +2,25 @@
 #include "L_Minerais.h"
 
 
+void FLvazia_e(L_entrada* lista_e){
+    lista_e->primeiroe = INICIO;
+    lista_e->ultimoe= lista_e->primeiroe;
+}
+int LInsere_e(L_entrada* lista_e, entradaminerais y){
+    if(lista_e->ultimoe==maxentrada){
+        return 0;
+    }
+    lista_e->item_e[lista_e->ultimoe++] = y;
+    return 1;
+}
+
+void LImprime_e(L_entrada* lista_e){
+    int i;
+    for (i = lista_e->primeiroe; i < lista_e->ultimoe; i++){
+        printf("\n%s\n", lista_e->item_e[i].nome);
+    }
+}
+
 void FLvazia_m(L_Minerais* lista_m){
     lista_m->primeiro = INICIO;
     lista_m->ultimo = lista_m->primeiro;

@@ -6,6 +6,7 @@ void printquntdsondas();
 void printmenu();
 void printquntdoperacoes();
 void printRochanova();
+void printsonda(int quntdsondas);
 
 
 

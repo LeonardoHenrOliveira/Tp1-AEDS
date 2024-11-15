@@ -2,14 +2,13 @@
 #include <stdlib.h>
 #include "Sonda.h"
 
-TSonda Inicializar_sonda(TSonda* sonda, int id, TLista* compartimento, float latitude, float longitude,float capacidade){
+TSonda Inicializar_sonda(TSonda* sonda, TLista* compartimento, float latitude, float longitude,float capacidade){
     Liga(sonda);
-    setId(sonda, id);
+    FazId(sonda);
     setCompartimento(sonda, compartimento);
     setLatitude(sonda, latitude);
     setLongitude(sonda, longitude);
     setCapacidade(sonda,capacidade);
-    
 
     return *sonda;
 }
@@ -26,9 +25,10 @@ void Move(TSonda* sonda, float latitude, float longitude){
     setLatitude(sonda, latitude);
     setLongitude(sonda, longitude);
 }
-
-void setId(TSonda* sonda, int id){
-    sonda->Identificador = id;
+int FazId(TSonda* sonda){
+    int aleatorio;
+    aleatorio= rand();
+    sonda->Identificador=aleatorio;
 }
 
 TLista setCompartimento(TSonda* sonda, TLista* lista_r){
@@ -64,4 +64,16 @@ int getLongitude(TSonda* sonda){
 }
 
 
+float setPesoSonda(TSonda* sonda, TLista* lista_r){
+    float peso_s = 0.0;
+
+    Apontador pAux;
+    pAux = lista_r->pPrimeiro->pProx;
+    while (pAux!=NULL){
+        peso_s += pAux->rocha.peso;
+        pAux = pAux->pProx;
+    }
+
+    sonda->peso = peso_s;
+}
 
