@@ -6,7 +6,6 @@
 
 int main() {
     
-    
     int quntdsondas, quntdoperacoes, i,operacao,peso, contador=0,j=0,k;
     char entrada[255];
     const char s[2]= " ";
@@ -16,7 +15,7 @@ int main() {
 
     L_Minerais lista_m;
     Minerais minerais;
-    Lista_s pLista;
+    Lista_s lista_sonda;
     TSonda sonda;
     Trocha lrocha;
     entradaminerais* entradam;
@@ -28,27 +27,26 @@ int main() {
     printquntdsondas();
     scanf("%d",&quntdsondas);
 
-    FLVazia_s(&pLista);
+    FLVazia_s(&lista_sonda);
     
-    for (k=0;k<quntdsondas;k++){
+    for (k = 0; k < quntdsondas; k++){
         printsonda(quntdsondas);
         scanf("%f %f %f %f %f",&lat_i, &long_i,&capacidade_i,&velocidade_i,&combustivel_i);
         FLVazia(&comp);
         TSonda sondaN = Inicializar_sonda(&sonda,&comp,lat_i,long_i,capacidade_i);
-        LInsere_s(&pLista, &sonda);
+        LInsere_s(&lista_sonda, &sonda);
     }
     
-
-
     
     printquntdoperacoes();
     scanf("%d",&quntdoperacoes);
     FLvazia_e(&lista_e);
-    for (i=0; i<quntdoperacoes; i++){
+
+    for (i = 0; i < quntdoperacoes; i++){
         printmenu();
         scanf("%d",&operacao);
-        if (operacao==1){
-            j=0;
+        if (operacao == 1){
+            j = 0;
             printRochanova();
             getchar();
             fgets(entrada, 255, stdin);
@@ -67,20 +65,22 @@ int main() {
                     j++;
                 }       
             }
-            
+            printf("\nTeste 121212121");
+
             strcpy(categoria, classifica_categoria(&lista_e, j,&lista_m,&lrocha));
-            
+            printf("\nTeste 5443");
+
             Trocha r1 = InicializaRocha(&lrocha, 1, peso, latitude, longitude, categoria);
             LInsere(&comp, &r1); 
 
-            for(j=0;j<3;j++){
+            for(j = 0;j < 3;j++){
                 Lretira_e(&lista_e);
             }
         }
-        if (operacao==2){
-           LImprime_s(&pLista, &comp);
+        if (operacao == 2){
+           LImprime_s(&lista_sonda, &comp);
         }
-        if (operacao==3){
+        if (operacao == 3){
 
         }
     }

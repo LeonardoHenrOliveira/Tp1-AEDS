@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <float.h>
 #include "L_Sondas.h"
 
 void FLVazia_s(Lista_s *lista_sonda){
@@ -48,22 +50,44 @@ void LImprime_s(Lista_s* lista_sonda, TLista* lista_c){
     }
 }
 
-void CalculaNovaRocha(Lista_s *lista_sonda, Trocha* rocha, float lat, float longt){
-    int sondaID;
+void CalculaNovaRocha(Lista_s *lista_sonda, Trocha* rocha){
+    TSonda* sondaProx = NULL;
+    float longt = rocha->latitude;
+    float lat = rocha->latitude;
 
     Apontador_s pAux;
     pAux = lista_sonda->pPrimeiro_s->pProx;
     while (pAux!=NULL){
-        if(LogicaEuclides(lista_sonda, lat, longt)){
-            
+
+        float cap_disponivel = pAux->item.capacidade - pAux->item.peso;
+        TSonda sonda = pAux->item;
+
+        if(cap_disponivel < rocha->peso){
+        continue;
         }
+
+        LogicaEuclides(lista_sonda, &sonda, longt, lat, &sondaProx);
+
         pAux = pAux->pProx;
     }   
+    sondaProx->compartimento->pUltimo->rocha = *rocha;
 }
 
 
-int LogicaEuclides(Lista_s* lista_sonda, float longitude, float latitude){
-    return 1;
+int LogicaEuclides(Lista_s *lista_sonda, TSonda* sonda, float longitude, float latitude, TSonda** sonda_prox){
+    float dist_anterior, dist_atual;
+
+    if(*sonda_prox == NULL){
+        *sonda_prox = sonda;
+        return 0;
+    }
+
+    dist_anterior = sqrt(pow(latitude - (*sonda_prox)->Latitude, 2) + pow(longitude - (*sonda_prox)->Longitude, 2));
+    dist_atual = sqrt(pow(latitude - sonda->Latitude, 2) + pow(longitude - sonda->Longitude, 2));
+
+    if(dist_anterior > dist_atual){
+        *sonda_prox = sonda;
+    }
 }
 
 float MediaSondas(Lista_s* lista_sonda){

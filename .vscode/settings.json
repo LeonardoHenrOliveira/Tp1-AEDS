@@ -3,6 +3,7 @@
         "L_Rochas.C": "cpp",
         "stdio.h": "c",
         "rocha.h": "c",
-        "l_entradas.h": "c"
+        "l_entradas.h": "c",
+        "l_sondas.h": "c"
     }
 }
