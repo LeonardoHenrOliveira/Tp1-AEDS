@@ -72,10 +72,8 @@ int main() {
             
             Trocha r1 = InicializaRocha(&lrocha, 1, peso, latitude, longitude, categoria);
             LInsere(&comp, &r1); 
-
-            for(j=0;j<3;j++){
-                Lretira_e(&lista_e);
-            }
+            Lretira_e(&lista_e);
+            
         }
         if (operacao==2){
            LImprime_s(&pLista, &comp);
