@@ -4,10 +4,12 @@
 #include "Rocha.h"
 #include "L_Minerais.h"
 
-Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude, char* categoria){
+Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, double longitude, char* categoria){
     setidentificador(rocha, identificador);
-    setlatitude(rocha,latitude);
     SetCategoria(rocha, categoria);
+    printf("%f",latitude);
+    setlatitude(rocha,latitude);
+    printf("%f",longitude);
     setlongitude(rocha,longitude);
     setpeso(rocha, peso);
 
@@ -114,9 +116,10 @@ void setpeso(Trocha *rocha, float peso){
 }
 void setlatitude(Trocha *rocha, float latitude){
     rocha->latitude = latitude;
+    printf("%f",latitude);
     
 }
-void setlongitude(Trocha *rocha, float longitude){
+void setlongitude(Trocha *rocha, double longitude){
     rocha->longitude = longitude;
 }
 void SetCategoria(Trocha*rocha, char* categoria){

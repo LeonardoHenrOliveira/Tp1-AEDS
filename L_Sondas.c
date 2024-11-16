@@ -51,6 +51,7 @@ void LImprime_s(Lista_s* lista_sonda, TLista* lista_c){
 }
 
 void CalculaNovaRocha(Lista_s *lista_sonda, Trocha* rocha){
+
     TSonda* sondaProx = NULL;
     float longt = rocha->latitude;
     float lat = rocha->latitude;
@@ -66,7 +67,7 @@ void CalculaNovaRocha(Lista_s *lista_sonda, Trocha* rocha){
         continue;
         }
 
-        LogicaEuclides(lista_sonda, &sonda, longt, lat, &sondaProx);
+        LogicaEuclides(lista_sonda, &sonda, longt, lat, sondaProx);
 
         pAux = pAux->pProx;
     }   
@@ -74,19 +75,19 @@ void CalculaNovaRocha(Lista_s *lista_sonda, Trocha* rocha){
 }
 
 
-int LogicaEuclides(Lista_s *lista_sonda, TSonda* sonda, float longitude, float latitude, TSonda** sonda_prox){
+int LogicaEuclides(Lista_s *lista_sonda, TSonda* sonda, float longitude, float latitude, TSonda* sonda_prox){
     float dist_anterior, dist_atual;
 
-    if(*sonda_prox == NULL){
-        *sonda_prox = sonda;
+    if(sonda_prox == NULL){
+        sonda_prox = sonda;
         return 0;
     }
 
-    dist_anterior = sqrt(pow(latitude - (*sonda_prox)->Latitude, 2) + pow(longitude - (*sonda_prox)->Longitude, 2));
+    dist_anterior = sqrt(pow(latitude - sonda_prox->Latitude, 2) + pow(longitude - sonda_prox->Longitude, 2));
     dist_atual = sqrt(pow(latitude - sonda->Latitude, 2) + pow(longitude - sonda->Longitude, 2));
 
     if(dist_anterior > dist_atual){
-        *sonda_prox = sonda;
+        sonda_prox = sonda;
     }
 }
 

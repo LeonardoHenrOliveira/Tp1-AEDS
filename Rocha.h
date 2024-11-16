@@ -18,12 +18,12 @@ typedef struct {
 void setidentificador(Trocha *rocha, int identificador);
 void setpeso(Trocha *rocha, float peso);
 void setlatitude(Trocha *rocha, float latitude);
-void setlongitude(Trocha *rocha, float longitude);
+void setlongitude(Trocha *rocha, double longitude);
 void SetCategoria(Trocha*rocha,char* categoria);
 
 char* classifica_categoria(L_entrada* lista_e,int j, L_Minerais * lista_m, Trocha * rocha_m);
 
-Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude, char* categoria);
+Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, double longitude, char* categoria);
 
 
 int getidentificador(Trocha* rocha);
