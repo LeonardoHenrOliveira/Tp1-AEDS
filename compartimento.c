@@ -8,7 +8,7 @@ void FLVazia(TLista *pLista){
     pLista->pPrimeiro->pProx = NULL;
 } 
 int LEHVazia(TLista* pLista){
-    return(pLista->pPrimeiro == pLista->pUltimo);
+    return(pLista->pPrimeiro->pProx == pLista->pUltimo);
 }
 int LInsere(TLista* pLista, Trocha* pRocha ){
     pLista->pUltimo->pProx = (Apontador) malloc(sizeof(Tcelula));

@@ -12,7 +12,7 @@ typedef struct {
     int EstaLigada;
 }TSonda;
 
-TSonda Inicializar_sonda(TSonda* sonda, TLista* compartimento, float latitude, float longitude, float capacidade);
+TSonda Inicializar_sonda(TSonda* sonda, float latitude, float longitude, float capacidade);
 int Liga(TSonda* sonda);
 int Desliga(TSonda* sonda);
 void Move(TSonda* sonda, float latitude, float longitude);

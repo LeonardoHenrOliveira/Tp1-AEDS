@@ -33,8 +33,7 @@ int main() {
     for (k = 0; k < quntdsondas; k++){
         printsonda(quntdsondas);
         scanf("%f %f %f %f %f",&lat_i, &long_i,&capacidade_i,&velocidade_i,&combustivel_i);
-        FLVazia(&comp);
-        TSonda sondaN = Inicializar_sonda(&sonda,&comp,lat_i,long_i,capacidade_i);
+        TSonda sondaN = Inicializar_sonda(&sonda,lat_i,long_i,capacidade_i);
         LInsere_s(&lista_sonda, &sonda);
     }
     
@@ -51,10 +50,9 @@ int main() {
             printRochanova();
             getchar();
             fgets(entrada, 255, stdin);
-            
+           
             token = strtok(entrada,s);
             longitude = atof(token);
-            printf("%f\n",longitude);
             token = strtok(NULL,s);
             latitude = atof(token);
             token = strtok(NULL, s);
@@ -68,21 +66,20 @@ int main() {
                     j++;
                 }       
             }
-            printf("%f",longitude);
-            printf("\nTeste 121212121");
+            
+           
+           
 
             strcpy(categoria, classifica_categoria(&lista_e, j,&lista_m,&lrocha));
             
-
+            longitude = 1;
             Trocha r1 = InicializaRocha(&lrocha, 1, peso, latitude, longitude, categoria);
             CalculaNovaRocha(&lista_sonda, &r1);
-            printf("\nTeste 5443");
-            LInsere(&comp, &r1); 
             Lretira_e(&lista_e);
             
         }
         if (operacao == 2){
-           LImprime_s(&lista_sonda, &comp);
+           LImprime_s(&lista_sonda);
         }
         if (operacao == 3){
 

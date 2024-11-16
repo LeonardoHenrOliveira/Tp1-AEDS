@@ -23,7 +23,7 @@ void SetCategoria(Trocha*rocha,char* categoria);
 
 char* classifica_categoria(L_entrada* lista_e,int j, L_Minerais * lista_m, Trocha * rocha_m);
 
-Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, double longitude, char* categoria);
+Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude, char* categoria);
 
 
 int getidentificador(Trocha* rocha);

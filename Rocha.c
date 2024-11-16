@@ -4,12 +4,10 @@
 #include "Rocha.h"
 #include "L_Minerais.h"
 
-Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, double longitude, char* categoria){
+Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude, char* categoria){
     setidentificador(rocha, identificador);
     SetCategoria(rocha, categoria);
-    printf("%f",latitude);
     setlatitude(rocha,latitude);
-    printf("%f",longitude);
     setlongitude(rocha,longitude);
     setpeso(rocha, peso);
 
@@ -20,12 +18,8 @@ char* classifica_categoria(L_entrada* lista_e,int j,L_Minerais * lista_m,Trocha*
     int i,TemFERR = 0,TemSola = 0,TemAqua = 0,TemTerra = 0,TemCala = 0;
     
     char* categoria = (char*)malloc(20 * sizeof(char));
-    
-    printf("\nPRIM %s  ",lista_e->item_e[0].nome);
-    printf("\nseg %s  ",lista_e->item_e[1].nome);
-    
-    printf("%d",j);
-    
+
+    printf("\n");
     if (j==3){
         if (strcmp(lista_e->item_e[0].nome,lista_m->item[2].Nome) || strcmp(lista_e->item_e[1].nome,lista_m->item[2].Nome) || strcmp(lista_e->item_e[2].nome,lista_m->item[2].Nome)){
            TemAqua=1; 
