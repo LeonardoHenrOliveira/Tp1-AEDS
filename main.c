@@ -19,7 +19,7 @@ int main() {
     Lista_s lista_sonda;
     TSonda sonda;
     Trocha lrocha;
-    entradaminerais* entradam;
+    entradaminerais entradam;
     TLista comp;
     L_entrada lista_e;
    
@@ -61,15 +61,11 @@ int main() {
             while( token!= NULL ) {
                 token = strtok(NULL,s);
                 if (token!=NULL){
-                    entradaminerais m1 = InicializarMinerale(entradam,token);
+                    entradaminerais m1 = InicializarMinerale(&entradam,token);
                     LInsere_e(&lista_e, m1);
                     j++;
                 }       
             }
-            
-           
-           
-
             strcpy(categoria, classifica_categoria(&lista_e, j,&lista_m,&lrocha));
             
             longitude = 1;
@@ -79,7 +75,8 @@ int main() {
             
         }
         if (operacao == 2){
-           LImprime_s(&lista_sonda);
+           operacaoI(&lista_sonda);
+            
         }
         if (operacao == 3){
 
