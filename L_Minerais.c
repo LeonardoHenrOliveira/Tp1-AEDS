@@ -37,10 +37,15 @@ int LInsere_m(L_Minerais* lista_m, Minerais x){
     return 1;
 };
 
+
+int Lretira_e(L_entrada* lista_e) {
+    lista_e->ultimoe=0;
+    return 0; 
+}
+
+
 int Lretira_m(L_Minerais* lista_m, int p, Minerais *px){
     int cont;
-    
-
     if(LEhVazia_m(lista_m) || p >= lista_m->ultimo || p < 0)
         return 0;
     
@@ -65,12 +70,12 @@ void PreencheMinerais(L_Minerais* lista_m, Minerais* mineral){
     FLvazia_m(lista_m);
 
     Minerais Ferrolita = InicializarMineral(mineral, "Ferrolita", 0.5, 0.7, "Cinza");
-    Minerais Solariun = InicializarMineral(mineral, "Aquamarina", 0.9, 0.2, "Amarelo");
+    Minerais Solarium = InicializarMineral(mineral, "Solarium", 0.9, 0.2, "Amarelo");
     Minerais Aquavitae = InicializarMineral(mineral, "Aquavitae", 0.5, 0.8, "Azul");
     Minerais Terranita = InicializarMineral(mineral, "Terranita", 0.5, 0.8, "Marrom");
     Minerais Calaris = InicializarMineral(mineral, "Calaris", 0.6, 0.5, "Vermelho");
     LInsere_m(lista_m, Ferrolita);
-    LInsere_m(lista_m, Solariun);
+    LInsere_m(lista_m, Solarium);
     LInsere_m(lista_m, Aquavitae);
     LInsere_m(lista_m, Terranita);
     LInsere_m(lista_m, Calaris);

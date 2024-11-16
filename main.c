@@ -10,8 +10,9 @@ int main() {
     int quntdsondas, quntdoperacoes, i,operacao,peso, contador=0,j=0,k;
     char entrada[255];
     const char s[2]= " ";
-    char*token, categoria[20];
-    float latitude, longitude,lat_i,long_i,velocidade_i,combustivel_i,capacidade_i;
+    char*token;
+    char categoria[20];
+    float latitude, longitude, lat_i, long_i, velocidade_i, combustivel_i, capacidade_i;
 
     L_Minerais lista_m;
     Minerais minerais;
@@ -21,7 +22,7 @@ int main() {
     entradaminerais* entradam;
     TLista comp;
     L_entrada lista_e;
-    L_entrada* listae;
+   
 
     PreencheMinerais(&lista_m, &minerais);
     printquntdsondas();
@@ -32,10 +33,11 @@ int main() {
     for (k=0;k<quntdsondas;k++){
         printsonda(quntdsondas);
         scanf("%f %f %f %f %f",&lat_i, &long_i,&capacidade_i,&velocidade_i,&combustivel_i);
+        FLVazia(&comp);
         TSonda sondaN = Inicializar_sonda(&sonda,&comp,lat_i,long_i,capacidade_i);
         LInsere_s(&pLista, &sonda);
     }
-    LImprime_s(&pLista);
+    
 
 
     
@@ -46,26 +48,37 @@ int main() {
         printmenu();
         scanf("%d",&operacao);
         if (operacao==1){
+            j=0;
             printRochanova();
             getchar();
             fgets(entrada, 255, stdin);
             token = strtok(entrada,s);
-            latitude=atof(token);
+            latitude = atof(token);
             token = strtok(NULL,s);
-            longitude= atof(token);
+            longitude = atof(token);
             token = strtok(NULL, s);
-            peso=atoi(token);
+            peso = atoi(token);
             
             while( token!= NULL ) {
                 token = strtok(NULL,s);
                 if (token!=NULL){
                     entradaminerais m1 = InicializarMinerale(entradam,token);
                     LInsere_e(&lista_e, m1);
-                }
+                    j++;
+                }       
+            }
+            
+            strcpy(categoria, classifica_categoria(&lista_e, j,&lista_m,&lrocha));
+            
+            Trocha r1 = InicializaRocha(&lrocha, 1, peso, latitude, longitude, categoria);
+            LInsere(&comp, &r1); 
+
+            for(j=0;j<3;j++){
+                Lretira_e(&lista_e);
             }
         }
         if (operacao==2){
-           
+           LImprime_s(&pLista, &comp);
         }
         if (operacao==3){
 

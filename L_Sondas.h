@@ -18,7 +18,14 @@ void FLVazia_s(Lista_s* lista_sonda);
 int LEHVazia_s(Lista_s* lista_sonda);
 int LInsere_s(Lista_s* lista_sonda, TSonda* sonda );
 int LRetita_s(Lista_s* lista_sonda, TSonda* sonda);
-void LImprime_s(Lista_s* lista_sonda);
+void LImprime_s(Lista_s* lista_sonda, TLista* lista_c);
 
+void operacaoI(Lista_s* lista_sonda);
+
+void OperacaoE(Lista_s* lista_sonda);
+void RedistribuirSondas(Lista_s* lista_Sonda);
 float MediaSondas(Lista_s* lista_sonda);
 void PosicaoInicial(Lista_s* lista_sonda);
+
+int LogicaEuclides(Lista_s* lista_sonda, float longitude, float latitude);
+void CalculaNovaRocha(Lista_s *lista_sonda, Trocha* rocha, float lat, float longt);

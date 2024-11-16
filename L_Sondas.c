@@ -32,19 +32,38 @@ int LRetira_s(Lista_s* lista_sonda, TSonda* sonda){
     return 1;
 }
 
-void LImprime_s(Lista_s* lista_sonda){
+void LImprime_s(Lista_s* lista_sonda, TLista* lista_c){
     Apontador_s pAux;
     pAux = lista_sonda->pPrimeiro_s->pProx;
-    printf("1");
     while (pAux!=NULL){
-        printf("21");
-        printf("Identificador sonda:%d\n",pAux->item.Identificador);
-        printf("status:%d\n",pAux->item.EstaLigada);
-        printf("localizacao:(%f,%f)\n",pAux->item.Latitude,pAux->item.Longitude);
-        printf("capacidade:%f\n",pAux->item.capacidade);
+        printf("\n");
+        printf("Identificador sonda:%d\n ",pAux->item.Identificador);
+        printf("status:%d\n ",pAux->item.EstaLigada);
+        printf("localizacao:(%.2f,%.2f)\n ",pAux->item.Latitude,pAux->item.Longitude);
+        printf("capacidade:%.2f\n ",pAux->item.capacidade);
+        printf("\n");
+        LImprime(lista_c);
         pAux = pAux->pProx;
 
     }
+}
+
+void CalculaNovaRocha(Lista_s *lista_sonda, Trocha* rocha, float lat, float longt){
+    int sondaID;
+
+    Apontador_s pAux;
+    pAux = lista_sonda->pPrimeiro_s->pProx;
+    while (pAux!=NULL){
+        if(LogicaEuclides(lista_sonda, lat, longt)){
+            
+        }
+        pAux = pAux->pProx;
+    }   
+}
+
+
+int LogicaEuclides(Lista_s* lista_sonda, float longitude, float latitude){
+    return 1;
 }
 
 float MediaSondas(Lista_s* lista_sonda){
@@ -71,5 +90,16 @@ void PosicaoInicial(Lista_s* lista_sonda){
         pAux->item.Longitude = 0.0;
         pAux = pAux->pProx;
     }
+}
 
+void RedistribuirSondas(Lista_s* lista_Sonda){
+    Apontador_s pAux;
+    pAux = lista_Sonda->pPrimeiro_s->pProx;
+    while (pAux!=NULL){
+        
+        pAux = pAux->pProx;
+    }
+}
+
+void OperacaoE(Lista_s* lista_sonda){
 }

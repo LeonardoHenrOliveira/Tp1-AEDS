@@ -5,11 +5,12 @@
 TSonda Inicializar_sonda(TSonda* sonda, TLista* compartimento, float latitude, float longitude,float capacidade){
     Liga(sonda);
     FazId(sonda);
+    
     setCompartimento(sonda, compartimento);
     setLatitude(sonda, latitude);
     setLongitude(sonda, longitude);
     setCapacidade(sonda,capacidade);
-
+    
     return *sonda;
 }
 

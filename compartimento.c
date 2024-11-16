@@ -31,7 +31,12 @@ void LImprime(TLista* pLista){
     Apontador pAux;
     pAux = pLista->pPrimeiro->pProx;
     while (pAux!=NULL){
-        printf("");
+        printf("==============================\n");
+        printf("%s\n", pAux->rocha.categoria);
+        printf("%d\n", pAux->rocha.identificador);
+        printf("%.2f\n", pAux->rocha.peso);
+        printf("%.2f\n", pAux->rocha.latitude);
+        printf("%.2f\n", pAux->rocha.longitude);
         pAux= pAux->pProx;
     }
 }

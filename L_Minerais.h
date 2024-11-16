@@ -30,6 +30,8 @@ void LImprime_m(L_Minerais* lista_m);
 void FLvazia_e(L_entrada* lista_e);
 int LInsere_e(L_entrada* lista_e, entradaminerais y);
 void LImprime_e(L_entrada* lista_e);
+int Lretira_e(L_entrada* lista_e);
+
 
 void PreencheMinerais(L_Minerais* lista_m, Minerais* mineral);
 
