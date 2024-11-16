@@ -69,8 +69,10 @@ void LImprime_s(Lista_s* lista_sonda){
 
 void CalculaNovaRocha(Lista_s *lista_sonda, Trocha *rocha) {
     TSonda *sondaProx = NULL; // Armazena a sonda mais próxima que pode coletar a rocha
+
     float longt = rocha->longitude; 
     float lat = rocha->latitude;
+    printf("\nuu\n");
 
     // Percorre a lista de sondas
     Apontador_s pAux = lista_sonda->pPrimeiro_s->pProx;
@@ -81,6 +83,8 @@ void CalculaNovaRocha(Lista_s *lista_sonda, Trocha *rocha) {
         // Verifica se a sonda pode coletar a rocha
         if (cap_disponivel >= rocha->peso || ContemCategoria(sonda, rocha->categoria, rocha->peso)) {
             LogicaEuclides(lista_sonda, sonda, longt, lat, &sondaProx);
+            printf("\nTETETET: %s", sondaProx->compartimento->pUltimo->rocha.categoria);
+
         }
 
         pAux = pAux->pProx;
@@ -101,6 +105,7 @@ void CalculaNovaRocha(Lista_s *lista_sonda, Trocha *rocha) {
         sondaProx->compartimento->pPrimeiro = NULL;
         sondaProx->compartimento->pUltimo = NULL;
     }
+
 
     Tcelula *novaCelula = (Tcelula *)malloc(sizeof(Tcelula));
     novaCelula->rocha = *rocha;
@@ -126,19 +131,18 @@ void CalculaNovaRocha(Lista_s *lista_sonda, Trocha *rocha) {
 
 int LogicaEuclides(Lista_s *lista_sonda, TSonda *sonda, float longitude, float latitude, TSonda **sonda_prox) {
     float dist_anterior, dist_atual;
+    
 
     if (*sonda_prox == NULL) {
         *sonda_prox = sonda; 
+        printf("TTTTTTTTTTTTTTTTTTT");
         return 0;
     }
-
     dist_anterior = sqrt(pow(latitude - (*sonda_prox)->Latitude, 2) + pow(longitude - (*sonda_prox)->Longitude, 2));
     dist_atual = sqrt(pow(latitude - sonda->Latitude, 2) + pow(longitude - sonda->Longitude, 2));
-
     if (dist_atual < dist_anterior) { 
         *sonda_prox = sonda; 
     }
-
     return 1;
 }
 
@@ -162,18 +166,18 @@ void operacaoI(Lista_s* lista_sonda){
     Apontador_s pAux;
     pAux = lista_sonda->pPrimeiro_s->pProx;
     while (pAux!=NULL){
-        printf("\n%d", pAux->item.Identificador);
-        printf("\n%f", pAux->item.Longitude);
-        printf("\n%f", pAux->item.Latitude);
+        printf("\nid: %d", pAux->item.Identificador);
+        printf("\nLONGITUDE: %.2f", pAux->item.Longitude);
+        printf("\nLATITUDE%.2f", pAux->item.Latitude);
         if(pAux->item.compartimento->pPrimeiro->pProx != NULL){
             printf("==============================\n");  
-            printf("\n%s", pAux->item.compartimento->pUltimo->rocha.categoria);
-            printf("\n%f", pAux->item.compartimento->pUltimo->rocha.peso);
+            printf("\nCategoria: %s", pAux->item.compartimento->pUltimo->rocha.categoria);
+            printf("\nPESO: %.2f", pAux->item.compartimento->pUltimo->rocha.peso);
             printf("\n==============================");
 
         }
-        else{
-            printf("Compartimento vazio!!");
+        else if (pAux->item.compartimento->pPrimeiro->pProx== NULL){
+            printf("\nCompartimento vazio!!\n\n");
         }
         pAux = pAux->pProx;
     }
@@ -239,6 +243,8 @@ int LogicaEuclides(Lista_s *lista_sonda, TSonda *sonda, float longitude, float l
 }
 
 */
+
+
 float MediaSondas(Lista_s* lista_sonda){
     float media = 0.0;
     int qnt = 0;

@@ -25,7 +25,6 @@ char* classifica_categoria(L_entrada* lista_e,int j, L_Minerais * lista_m, Troch
 
 Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude, char* categoria);
 
-
 int getidentificador(Trocha* rocha);
 float getpeso(Trocha* rocha);
 char* getcategoria(Trocha* rocha);

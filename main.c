@@ -75,8 +75,7 @@ int main() {
             
         }
         if (operacao == 2){
-           operacaoI(&lista_sonda);
-            
+            operacaoI(&lista_sonda);           
         }
         if (operacao == 3){
 
