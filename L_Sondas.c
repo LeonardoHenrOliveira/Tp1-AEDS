@@ -116,6 +116,7 @@ float MediaSondas(Lista_s* lista_sonda){
     Apontador_s pAux;
     pAux = lista_sonda->pPrimeiro_s->pProx;
     while (pAux!=NULL){
+        setPesoSonda(&pAux->item, &pAux->item.compartimento);
         media += pAux->item.peso;
         qnt++;
         pAux = pAux->pProx;
@@ -182,16 +183,17 @@ void OperacaoE(Lista_s* lista_sonda){
 
     pAux = lista_sonda->pPrimeiro_s->pProx;
     if(!(LEHVazia(&lista_temp))){
+
         while(!(LEHVazia(&lista_temp))){
-            printf("\n\ndentro do vazio\n\n");
             pAux = lista_sonda->pPrimeiro_s->pProx;
+
             while(pAux != NULL){
+
                 if(pAux->item.peso < media ){
-                    printf("\n\ndentro do vazio ao quadrado\n\n");
                     if(LEHVazia(&pAux->item.compartimento) && pAux->item.peso < media){
-                        pAux->item.peso += lista_temp.pUltimo->rocha.peso;
-                        LInsere(&pAux->item.compartimento, &lista_temp.pUltimo->rocha);
-                        LRetira(&lista_temp, &lista_temp.pUltimo->rocha);
+                        pAux->item.peso += lista_temp.pUltimo->pProx->rocha.peso;
+                        LInsere(&pAux->item.compartimento, &lista_temp.pUltimo->pProx->rocha);
+                        LRetira(&lista_temp, &lista_temp.pUltimo->pProx->rocha);
                     }
 
                 }
@@ -200,6 +202,8 @@ void OperacaoE(Lista_s* lista_sonda){
         }
         
     }
+
+    printf("\n\nMEDIA: %.2f\n\n", media);
 
 }
 
