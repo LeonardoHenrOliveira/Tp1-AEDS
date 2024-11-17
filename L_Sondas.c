@@ -52,7 +52,7 @@ float percorrer(TLista comp, char* cat){
 TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
     TSonda *sondaProx = NULL;
     float m_distancia = 10000000000000; 
-    float distancia=0;
+    float distancia = 0;
     float longt = rocha->longitude; 
     float lat = rocha->latitude;
 
@@ -188,12 +188,12 @@ void OperacaoE(Lista_s* lista_sonda){
             pAux = lista_sonda->pPrimeiro_s->pProx;
 
             while(pAux != NULL){
-
+                printf("\nDENTRO DO SOBRA\n");
                 if(pAux->item.peso < media ){
                     if(LEHVazia(&pAux->item.compartimento) && pAux->item.peso < media){
-                        pAux->item.peso += lista_temp.pUltimo->pProx->rocha.peso;
-                        LInsere(&pAux->item.compartimento, &lista_temp.pUltimo->pProx->rocha);
-                        LRetira(&lista_temp, &lista_temp.pUltimo->pProx->rocha);
+                        pAux->item.peso += lista_temp.pPrimeiro->pProx->rocha.peso;
+                        LInsere(&pAux->item.compartimento, &lista_temp.pPrimeiro->pProx->rocha);
+                        LRetira(&lista_temp, &lista_temp.pPrimeiro->pProx->rocha);
                     }
 
                 }
@@ -214,8 +214,9 @@ void Operacao_i(Lista_s *lista_sonda){
     while (pAux!=NULL){
         TSonda* sonda_2 = &pAux->item;
         printf("\n======================================\n");
-        printf("ID: %d\n", sonda_2->Identificador);
+        printf("\nID: %d\n", sonda_2->Identificador);
         printf("Localizacao:(%.2f,%.2f)\n",sonda_2->Latitude,sonda_2->Longitude);
+        printf("\n");
                 
         if(LEHVazia(&sonda_2->compartimento)){
             printf("Compartimento vazio!\n");
