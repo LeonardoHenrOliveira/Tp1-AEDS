@@ -36,35 +36,17 @@ int LRetira_s(Lista_s* lista_sonda, TSonda* sonda){
 }
 
 
-void LImprime_s(Lista_s* lista_sonda){
-    Apontador_s pAux;
+float percorrer(TLista comp, char* cat){
+    Tcelula *pAux = comp.pPrimeiro->pProx;
 
-    pAux = lista_sonda->pPrimeiro_s->pProx;
-    while (pAux!=NULL){
-        TLista *lista_c;
-        lista_c = pAux->item.compartimento;
-        
-        printf("\n");
-        printf("Identificador sonda:%d\n ",pAux->item.Identificador);
-        printf("status:%d\n ",pAux->item.EstaLigada);
-        printf("localizacao:(%.2f,%.2f)\n ",pAux->item.Latitude,pAux->item.Longitude);
-        printf("capacidade:%.2f\n ",pAux->item.capacidade);
-        printf("\n");
-        if(pAux->item.compartimento->pPrimeiro){
-            printf("\nCompartimento vazio!!!");
-        }else{
-            printf("==============================\n");
-            printf("%s\n", pAux->item.compartimento->pPrimeiro->pProx->rocha.categoria);
-            printf("%d\n", pAux->item.compartimento->pPrimeiro->pProx->rocha.identificador);
-            printf("%.2f\n", pAux->item.compartimento->pPrimeiro->pProx->rocha.peso);
-            printf("%.2f\n", pAux->item.compartimento->pPrimeiro->pProx->rocha.latitude);
-            printf("%.2f\n",  pAux->item.compartimento->pPrimeiro->pProx->rocha.longitude);
+    while (pAux != NULL) {
+        if (strcmp(pAux->rocha.categoria,cat)){
+            return pAux->rocha.peso;
         }
         pAux = pAux->pProx;
     }
-    
-}
-
+    return 0;
+};
 
 
 TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
@@ -78,30 +60,43 @@ TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
 
     while (usando!= NULL){
         TSonda *sonda_s = &usando->item;
-        distancia = sqrt(pow(lat - sonda_s->Latitude, 2) + pow(longt - sonda_s->Longitude, 2));
-        if (distancia<m_distancia){
-            m_distancia=distancia;
-            sondaProx=sonda_s;
+
+        if((sonda_s->capacidade < rocha->peso) ){
+            usando = usando->pProx;
+            continue;
         }
+    
+        distancia = sqrt(pow(lat - sonda_s->Latitude, 2) + pow(longt - sonda_s->Longitude, 2));
+
+        if (distancia < m_distancia ){
+            m_distancia = distancia;
+            sondaProx = sonda_s;
+
+        }else if(ContemCategoria(sonda_s, rocha->categoria, percorrer(sonda_s->compartimento, rocha->categoria))){
+            sondaProx = sonda_s;
+            break;
+        }
+
+        sonda_s->capacidade -= rocha->peso;
+        sonda_s->peso += rocha->peso;
         usando=usando->pProx;
     }
+
+    Move(sondaProx,rocha->latitude,rocha->longitude);
+    printf("\n");
     printf("\n++++ Coleta realizada com sucesso! ++++\n");
     printf("Sonda: %d\n", sondaProx->Identificador);
-    printf("Rocha coletada: %s, Peso: %f\n", rocha->categoria, rocha->peso);
-    printf("Nova posição da sonda: (%f, %f)\n", sondaProx->Latitude, sondaProx->Longitude);
-
+    printf("Rocha coletada: %s, Peso: %.2f\n", rocha->categoria, rocha->peso);
+    printf("Nova posicao da sonda: (%.2f, %.2f)\n", sondaProx->Latitude, sondaProx->Longitude);
+    printf("\n");
     return sondaProx;
 }
 
 
 int ContemCategoria(TSonda *sonda, const char *categoria, float pesoMinimo) {
-    if (sonda->compartimento == NULL) {
-        return 0;
-    }
-
-    Tcelula *pAux = sonda->compartimento->pPrimeiro;
+    Tcelula *pAux = sonda->compartimento.pPrimeiro->pProx;
     while (pAux != NULL) {
-        if (strcmp(pAux->rocha.categoria, categoria) == 0 && pAux->rocha.peso > pesoMinimo) {
+        if (strcmp(pAux->rocha.categoria, categoria) == 0 && pAux->rocha.peso < pesoMinimo) {
             return 1;
         }
         pAux = pAux->pProx;
@@ -110,9 +105,7 @@ int ContemCategoria(TSonda *sonda, const char *categoria, float pesoMinimo) {
     return 0;
 }
 
-void operacaoI(Lista_s* lista_sonda){
 
-}
 
 
 
@@ -132,24 +125,101 @@ float MediaSondas(Lista_s* lista_sonda){
     return media;
 }
 
-void PosicaoInicial(Lista_s* lista_sonda){
-    Apontador_s pAux;
-    pAux = lista_sonda->pPrimeiro_s->pProx;
+void retiraRochas(TSonda* sonda, TLista* temp_lista, float media){
+    Apontador pAux;
+    pAux = sonda->compartimento.pPrimeiro->pProx;
     while (pAux!=NULL){
-        pAux->item.Latitude = 0.0;
-        pAux->item.Longitude = 0.0;
+        if(sonda->peso > media){
+            sonda->peso -= pAux->rocha.peso;
+            Trocha* rocha_temp = &pAux->rocha;
+            LInsere(temp_lista, rocha_temp);
+            LRetira(&sonda->compartimento, rocha_temp);
+        }
         pAux = pAux->pProx;
     }
 }
 
-void RedistribuirSondas(Lista_s* lista_Sonda){
-    Apontador_s pAux;
-    pAux = lista_Sonda->pPrimeiro_s->pProx;
+void voltarRocha(TSonda* sonda, TLista* temp_lista, float media){
+    Apontador pAux;
+    pAux = temp_lista->pPrimeiro->pProx;
+
     while (pAux!=NULL){
-        
+        if((sonda->peso < media && sonda->capacidade > pAux->rocha.peso)){
+            sonda->peso += pAux->rocha.peso;
+            LInsere(&sonda->compartimento, &pAux->rocha);
+            LRetira(temp_lista, &pAux->rocha);
+            printf("\nDentro17\n");
+        }
         pAux = pAux->pProx;
     }
 }
 
 void OperacaoE(Lista_s* lista_sonda){
+    float media;
+    Celula_s* pAux;
+    pAux = lista_sonda->pPrimeiro_s->pProx;
+
+    TLista lista_temp;
+    FLVazia(&lista_temp);
+    media = MediaSondas(lista_sonda);
+
+    printf("fora\n");
+    while (pAux!=NULL){
+        Move(&pAux->item, 0, 0);
+        retiraRochas(&pAux->item, &lista_temp, media);
+        pAux = pAux->pProx;
+    }
+
+    printf("fora22\n");
+
+    if(!(LEHVazia(&lista_temp))){
+        pAux = lista_sonda->pPrimeiro_s->pProx;
+        while (pAux!=NULL){
+            voltarRocha(&pAux->item, &lista_temp, media);
+            pAux = pAux->pProx;
+        }
+    }
+
+    pAux = lista_sonda->pPrimeiro_s->pProx;
+    if(!(LEHVazia(&lista_temp))){
+        while(!(LEHVazia(&lista_temp))){
+            printf("\n\ndentro do vazio\n\n");
+            pAux = lista_sonda->pPrimeiro_s->pProx;
+            while(pAux != NULL){
+                if(pAux->item.peso < media ){
+                    printf("\n\ndentro do vazio ao quadrado\n\n");
+                    if(LEHVazia(&pAux->item.compartimento) && pAux->item.peso < media){
+                        pAux->item.peso += lista_temp.pUltimo->rocha.peso;
+                        LInsere(&pAux->item.compartimento, &lista_temp.pUltimo->rocha);
+                        LRetira(&lista_temp, &lista_temp.pUltimo->rocha);
+                    }
+
+                }
+                pAux = pAux->pProx;
+            }
+        }
+        
+    }
+
+}
+
+
+void Operacao_i(Lista_s *lista_sonda){
+    Celula_s* pAux;
+    pAux = lista_sonda->pPrimeiro_s->pProx;
+    while (pAux!=NULL){
+        TSonda* sonda_2 = &pAux->item;
+        printf("\n======================================\n");
+        printf("ID: %d\n", sonda_2->Identificador);
+        printf("Localizacao:(%.2f,%.2f)\n",sonda_2->Latitude,sonda_2->Longitude);
+                
+        if(LEHVazia(&sonda_2->compartimento)){
+            printf("Compartimento vazio!\n");
+        }
+        else{
+            LImprime(&sonda_2->compartimento);
+        }
+            pAux = pAux->pProx;
+        }
+    printf("\n======================================\n");
 }

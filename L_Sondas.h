@@ -20,8 +20,11 @@ int LInsere_s(Lista_s* lista_sonda, TSonda* sonda );
 int LRetita_s(Lista_s* lista_sonda, TSonda* sonda);
 void LImprime_s(Lista_s* lista_sonda);
 
-void operacaoI(Lista_s* lista_sonda);
+float percorrer(TLista comp, char* cat);
+void retiraRochas(TSonda* sonda, TLista* temp_lista, float media);
+void voltarRocha(TSonda* sonda, TLista* temp_lista, float media);
 
+void Operacao_i(Lista_s* lista_sonda);
 void OperacaoE(Lista_s* lista_sonda);
 void RedistribuirSondas(Lista_s* lista_Sonda);
 float MediaSondas(Lista_s* lista_sonda);

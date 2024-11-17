@@ -4,7 +4,6 @@
 #include "compartimento.h"
 
 void FLVazia(TLista* pLista){
-
     pLista->pPrimeiro = (Apontador)malloc(sizeof(Tcelula));
     pLista->pUltimo = pLista->pPrimeiro;
     pLista->pPrimeiro->pProx = NULL;
@@ -14,7 +13,6 @@ int LEHVazia(TLista* pLista){
 }
 int LInsere(TLista* pLista, Trocha* pRocha ){
     Apontador novarocha= (Apontador)malloc(sizeof(Tcelula));
-
     strcpy(novarocha->rocha.categoria,pRocha->categoria);
     novarocha->rocha.peso=pRocha->peso;
     novarocha->rocha.latitude=pRocha->latitude;
@@ -23,7 +21,7 @@ int LInsere(TLista* pLista, Trocha* pRocha ){
     novarocha->pProx=NULL;
     pLista->pUltimo=novarocha;
 }
-int LRetita(TLista* pLista, Trocha* pRocha){
+int LRetira(TLista* pLista, Trocha* pRocha){
     Tcelula* pAux;
     if (LEHVazia(pLista)){
         return 0;

@@ -6,8 +6,8 @@
 
 int main() {
     
-    int quntdsondas, quntdoperacoes, i,operacao,peso, contador=0,j=0,k;
-    char entrada[255];
+    int quntdsondas, quntdoperacoes, i,peso, contador=0,j=0,k,escolha;
+    char entrada[255], operacao;
     const char s[2]= " ";
     char*token;
     char categoria[20];
@@ -22,91 +22,82 @@ int main() {
     entradaminerais entradam;
     TLista comp;
     L_entrada lista_e;
+
+
+    printf("Escolha se o codigo será rodado pela entrada do terminal ou de um arquivo txt:\n(1)=arquivo\n(2)=terminal\n");
+    scanf("%d",&escolha);
    
+    if (escolha==1){
 
-    PreencheMinerais(&lista_m, &minerais);
-    printquntdsondas();
-    scanf("%d",&quntdsondas);
-
-    FLVazia_s(&lista_sonda);
-    
-    for (k = 0; k < quntdsondas; k++){
-        TSonda Nsonda;
-        printsonda(quntdsondas);
-        scanf("%f %f %f %f %f",&Nsonda.Latitude, &Nsonda.Longitude,&Nsonda.capacidade,&velocidade_i,&combustivel_i);
-        Inicializar_sonda(&Nsonda,Nsonda.Latitude,Nsonda.Longitude,Nsonda.capacidade);
-        FLVazia(&Nsonda.compartimento);
-        LInsere_s(&lista_sonda, &Nsonda);
     }
+    else if (escolha==2){
+        PreencheMinerais(&lista_m, &minerais);
+        printquntdsondas();
+        scanf("%d",&quntdsondas);
+
+        FLVazia_s(&lista_sonda);
+    
+        for (k = 0; k < quntdsondas; k++){
+            TSonda Nsonda;
+            printsonda(quntdsondas);
+            scanf("%f %f %f %f %f", &Nsonda.Latitude, &Nsonda.Longitude,&Nsonda.capacidade,&velocidade_i,&combustivel_i);
+            Inicializar_sonda(&Nsonda,Nsonda.Latitude,Nsonda.Longitude,Nsonda.capacidade);
+            LInsere_s(&lista_sonda, &Nsonda);
+        }
     
     
-    printquntdoperacoes();
-    scanf("%d",&quntdoperacoes);
-    FLvazia_e(&lista_e);
-
-    for (i = 0; i < quntdoperacoes; i++){
-        printmenu();
-        scanf("%d",&operacao);
-        if (operacao == 1){
-            j = 0;
-            printRochanova();
-            getchar();
-            fgets(entrada, 255, stdin);
-            entrada[strcspn(entrada, "\n")] = '\0';
-
-            token = strtok(entrada,s);
-            longitude = atof(token);
-            token = strtok(NULL,s);
-            latitude = atof(token);
-            token = strtok(NULL, s);
-            peso = atoi(token);
+        printquntdoperacoes();
+        scanf("%d",&quntdoperacoes);
+        FLvazia_e(&lista_e);
+        
+        for (i = 0; i < quntdoperacoes; i++){
+            printmenu();
+            scanf(" %c",&operacao);
             
-            while( token!= NULL ) {
+            if(operacao=='R'){
+                j = 0;
+                printRochanova();
+                getchar();
+                fgets(entrada, 255, stdin);
+                entrada[strcspn(entrada, "\n")] = '\0';
+
+                token = strtok(entrada,s);
+                latitude = atof(token);
                 token = strtok(NULL,s);
-                if (token!=NULL){
-                    entradaminerais m1 = InicializarMinerale(&entradam,token);
-                    LInsere_e(&lista_e, m1);
-                    j++;
-                }       
-            }
-            Trocha rnova;
-            strcpy(rnova.categoria, " ");
+                longitude = atof(token);
+                token = strtok(NULL, s);
+                peso = atoi(token);
             
-            Trocha r1 = InicializaRocha(&rnova,1, peso, latitude, longitude);
-            TSonda *sondamaisprox = Calculo_sonda_prox(&lista_sonda, &r1);
+                while( token!= NULL ) {
+                    token = strtok(NULL,s);
+                    if (token!=NULL){
+                        entradaminerais m1 = InicializarMinerale(&entradam,token);
+                        LInsere_e(&lista_e, m1);
+                        j++;
+                    }       
+                }
             
-            classifica_categoria(&lista_e,&rnova);
-            LInsere(sondamaisprox->compartimento,&r1);
+                Trocha rnova;
+                classifica_categoria(&lista_e,&rnova,j);
+                Lretira_e(&lista_e);
+                Trocha r1 = InicializaRocha(&rnova,1, peso, latitude, longitude);
+                TSonda *sondamaisprox = Calculo_sonda_prox(&lista_sonda, &rnova);
+                LInsere(&sondamaisprox->compartimento,&rnova);
             
-        }
-        if (operacao == 2){
-            Celula_s* pAux;
-            pAux = lista_sonda.pPrimeiro_s->pProx;
-            while (pAux!=NULL){
-                TSonda* sonda_2 = &pAux->item;
-                printf("\n======================================\n");
-                printf("ID: %d\n", sonda_2->Identificador);
                 
-                if(pAux->item.compartimento->pPrimeiro == NULL){
-                    printf("Compartimento vazio!\n");
-                }
-                else{
-                    Apontador pAux2;
-                    pAux2 = pAux->item.compartimento->pPrimeiro->pProx;
-                    while (pAux!=NULL){
-                        printf("%s %.2f\n",pAux2->rocha.categoria , pAux2->rocha.peso);
-                        pAux= pAux->pProx;
-                    }
-                }
-        pAux = pAux->pProx;
+            }
+            else if (operacao== 'I'){
+                Operacao_i(&lista_sonda);
+            }
+            else if (operacao== 'E'){
+                OperacaoE(&lista_sonda);
+            }
+            else{
+                printf ("operacao invalido");
+            }
+            
         }
-        printf("\n======================================\n");
-        }
-        if (operacao == 3){
 
-        }
     }
-
-
 
 }

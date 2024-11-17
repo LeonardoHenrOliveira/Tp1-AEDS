@@ -8,7 +8,7 @@ void Inicializar_sonda(TSonda *sonda, float latitude, float longitude,float capa
     setLatitude(sonda, latitude);
     setLongitude(sonda, longitude);
     setCapacidade(sonda,capacidade);
-    
+    FLVazia(&sonda->compartimento);
 }
 
 int Liga(TSonda* sonda){
@@ -29,9 +29,6 @@ int FazId(TSonda* sonda){
     sonda->Identificador=aleatorio;
 }
 
-TLista setCompartimento(TSonda* sonda, TLista* lista_r){
-    sonda->compartimento = lista_r;
-}
 
 void setLatitude(TSonda* sonda, float latitude){
     sonda->Latitude = latitude;
@@ -49,9 +46,6 @@ int getId(TSonda* sonda){
     return sonda->Identificador;
 }
 
-TLista* getCompartimento(TSonda* sonda){
-    return sonda->compartimento;
-}
 
 int getLatitude(TSonda* sonda){
     return sonda->Latitude;

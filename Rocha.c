@@ -12,8 +12,8 @@ Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latit
 
     return *rocha;
 }
-void classifica_categoria(L_entrada* lista_e,Trocha* rocha_m) {
-    if (lista_e->item_e[1].nome == NULL || strcmp(lista_e->item_e[1].nome, "") == 0) { 
+void classifica_categoria(L_entrada* lista_e,Trocha* rocha_m,int j) {
+    if (j==1) { 
         
         if (strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0) {
             strcpy(rocha_m->categoria, "Ferrom");
@@ -24,7 +24,7 @@ void classifica_categoria(L_entrada* lista_e,Trocha* rocha_m) {
         else {
             strcpy(rocha_m->categoria, "Sem Categoria");
         }
-    } else { 
+    } else if(j==2) { 
         if ((strcmp(lista_e->item_e[0].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[1].nome, "Terranita") == 0) || (strcmp(lista_e->item_e[1].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[0].nome, "Terranita") == 0)) {
             strcpy(rocha_m->categoria, "Aquaterra");
         } 
@@ -49,8 +49,10 @@ void classifica_categoria(L_entrada* lista_e,Trocha* rocha_m) {
         else {
             strcpy(rocha_m->categoria, "Sem Categoria");
         }
+    }else if(j==3){
+        strcpy(rocha_m->categoria,"Aquacalis");
     }
-    printf("%s",rocha_m->categoria);
+
 }
 
 
@@ -64,7 +66,6 @@ void setpeso(Trocha *rocha, float peso){
 }
 void setlatitude(Trocha *rocha, float latitude){
     rocha->latitude = latitude;
-    printf("%f",latitude);
     
 }
 void setlongitude(Trocha *rocha, double longitude){
