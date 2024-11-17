@@ -40,7 +40,7 @@ float percorrer(TLista comp, char* cat){
     Tcelula *pAux = comp.pPrimeiro->pProx;
 
     while (pAux != NULL) {
-        if (strcmp(pAux->rocha.categoria,cat)){
+        if (strcmp(pAux->rocha.categoria,cat) == 0){
             return pAux->rocha.peso;
         }
         pAux = pAux->pProx;
@@ -89,6 +89,7 @@ TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
     printf("Rocha coletada: %s, Peso: %.2f\n", rocha->categoria, rocha->peso);
     printf("Nova posicao da sonda: (%.2f, %.2f)\n", sondaProx->Latitude, sondaProx->Longitude);
     printf("\n");
+    
     return sondaProx;
 }
 

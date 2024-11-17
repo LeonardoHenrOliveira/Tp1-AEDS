@@ -61,16 +61,25 @@ int main() {
                     float latitude, longitude;
                     int peso;
                     char minerais_entrada[255];
-                    fscanf(arquivo, "%f %f %d ", &latitude, &longitude, &peso, minerais_entrada);
+                    int ch;
+                    while ((ch = fgetc(arquivo)) != '\n' && ch != EOF);
+                    fgets(entrada, 255, arquivo);
+                    entrada[strcspn(entrada, "\n")] = '\0';
 
-                    L_entrada lista_e;
-                    FLvazia_e(&lista_e);
-                    char* token = strtok(minerais_entrada, " ");
-                    while (token != NULL) {
-                        entradaminerais m1 = InicializarMinerale(&entradam, token);
-                        LInsere_e(&lista_e, m1);
-                        token = strtok(NULL, " ");
-                        l++;
+                    token = strtok(entrada,s);
+                    latitude = atof(token);
+                    token = strtok(NULL,s);
+                    longitude = atof(token);
+                    token = strtok(NULL, s);
+                    peso = atoi(token);
+                   
+                    while( token!= NULL ) {
+                        token = strtok(NULL,s);
+                        if (token!=NULL){
+                            entradaminerais m1 = InicializarMinerale(&entradam,token);
+                            LInsere_e(&lista_e, m1);
+                            l++;
+                        }       
                     }
 
                     Trocha rnova;
