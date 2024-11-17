@@ -21,7 +21,7 @@ void setlatitude(Trocha *rocha, float latitude);
 void setlongitude(Trocha *rocha, double longitude);
 void SetCategoria(Trocha*rocha,char* categoria);
 
-char* classifica_categoria(L_entrada* lista_e,int j, L_Minerais * lista_m, Trocha * rocha_m);
+void classifica_categoria(L_entrada* lista_e, Trocha * rocha_m);
 
 Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude, char* categoria);
 

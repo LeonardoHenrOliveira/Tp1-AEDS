@@ -67,66 +67,30 @@ void LImprime_s(Lista_s* lista_sonda){
 
 
 
-void CalculaNovaRocha(Lista_s *lista_sonda, Trocha *rocha) {
-    TSonda *sondaProx = NULL; // Armazena a sonda mais próxima que pode coletar a rocha
-
+TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
+    TSonda *sondaProx = NULL;
+    float m_distancia = 10000000000000; 
+    float distancia=0;
     float longt = rocha->longitude; 
     float lat = rocha->latitude;
-    printf("\nuu\n");
 
-    // Percorre a lista de sondas
-    Apontador_s pAux = lista_sonda->pPrimeiro_s->pProx;
-    while (pAux != NULL) {
-        TSonda *sonda = &pAux->item;
-        float cap_disponivel = sonda->capacidade - sonda->peso;
+    Celula_s* usando= lista_sonda->pPrimeiro_s->pProx;
 
-        // Verifica se a sonda pode coletar a rocha
-        if (cap_disponivel >= rocha->peso || ContemCategoria(sonda, rocha->categoria, rocha->peso)) {
-            LogicaEuclides(lista_sonda, sonda, longt, lat, &sondaProx);
-            printf("\nTETETET: %s", sondaProx->compartimento->pUltimo->rocha.categoria);
-
+    while (usando!= NULL){
+        TSonda *sonda_s = &usando->item;
+        distancia = sqrt(pow(lat - sonda_s->Latitude, 2) + pow(longt - sonda_s->Longitude, 2));
+        if (distancia<m_distancia){
+            m_distancia=distancia;
+            sondaProx=sonda_s;
         }
-
-        pAux = pAux->pProx;
+        usando=usando->pProx;
     }
-
-    if (sondaProx == NULL) {
-        printf("Nenhuma sonda adequada foi encontrada para coletar a rocha.\n");
-        return;
-    }
-
-    // Move a sonda selecionada para a posição da rocha
-    sondaProx->Latitude = rocha->latitude;
-    sondaProx->Longitude = rocha->longitude;
-
-    // Insere a rocha no compartimento da sonda
-    if (sondaProx->compartimento == NULL) {
-        sondaProx->compartimento->pPrimeiro->pProx = (Apontador)malloc(sizeof(Tcelula));
-        sondaProx->compartimento->pPrimeiro = NULL;
-        sondaProx->compartimento->pUltimo = NULL;
-    }
-
-
-    Tcelula *novaCelula = (Tcelula *)malloc(sizeof(Tcelula));
-    novaCelula->rocha = *rocha;
-    novaCelula->pProx = NULL;
-
-    if (sondaProx->compartimento->pPrimeiro == NULL) {
-        sondaProx->compartimento->pPrimeiro = novaCelula;
-        sondaProx->compartimento->pUltimo = novaCelula;
-    } else {
-        sondaProx->compartimento->pUltimo->pProx = novaCelula;
-        sondaProx->compartimento->pUltimo = novaCelula;
-    }
-
-    // Atualiza o peso da sonda
-    sondaProx->peso += rocha->peso;
-
-    // Exibe informações da coleta
     printf("\n++++ Coleta realizada com sucesso! ++++\n");
     printf("Sonda: %d\n", sondaProx->Identificador);
     printf("Rocha coletada: %s, Peso: %f\n", rocha->categoria, rocha->peso);
     printf("Nova posição da sonda: (%f, %f)\n", sondaProx->Latitude, sondaProx->Longitude);
+
+    return sondaProx;
 }
 
 int LogicaEuclides(Lista_s *lista_sonda, TSonda *sonda, float longitude, float latitude, TSonda **sonda_prox) {

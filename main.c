@@ -50,7 +50,8 @@ int main() {
             printRochanova();
             getchar();
             fgets(entrada, 255, stdin);
-           
+            entrada[strcspn(entrada, "\n")] = '\0';
+
             token = strtok(entrada,s);
             longitude = atof(token);
             token = strtok(NULL,s);
@@ -66,11 +67,11 @@ int main() {
                     j++;
                 }       
             }
-            strcpy(categoria, classifica_categoria(&lista_e, j,&lista_m,&lrocha));
+            classifica_categoria(&lista_e,&lrocha);
             
-            longitude = 1;
+            printf("%f",longitude);
             Trocha r1 = InicializaRocha(&lrocha, 1, peso, latitude, longitude, categoria);
-            CalculaNovaRocha(&lista_sonda, &r1);
+            TSonda *sondamaisprox = Calculo_sonda_prox(&lista_sonda, &r1);
             Lretira_e(&lista_e);
             
         }

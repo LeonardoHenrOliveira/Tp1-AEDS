@@ -13,70 +13,45 @@ Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latit
 
     return *rocha;
 }
-/**/
-char* classifica_categoria(L_entrada* lista_e,int j,L_Minerais * lista_m,Trocha* rocha_m){
-
-    
-    char* categoria = (char*)malloc(20 * sizeof(char));
-
-    printf("\n");
-        if (j == 0){
-            printf("Nao tem mineral\n");
-            return "0";
+void classifica_categoria(L_entrada* lista_e,Trocha* rocha_m) {
+    if (lista_e->item_e[1].nome == NULL || strcmp(lista_e->item_e[1].nome, "") == 0) { 
+        
+        if (strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0) {
+            strcpy(rocha_m->categoria, "Ferrom");
         }
-    
-    if (j == 1)
-    {
-        {
-            if (strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0)
-            {
-                strcpy(categoria,"Ferrom");
-            }
-            else if (strcmp(lista_e->item_e[0].nome, "Solarium") == 0)
-            {
-                strcpy(categoria,"Solaris");
-            }
+        else if (strcmp(lista_e->item_e[0].nome, "Solarium") == 0) {
+            strcpy(rocha_m->categoria, "Solaris");
+        }  
+        else {
+            strcpy(rocha_m->categoria, "Sem Categoria");
+        }
+    } else { 
+        if ((strcmp(lista_e->item_e[0].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[1].nome, "Terranita") == 0) || (strcmp(lista_e->item_e[1].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[0].nome, "Terranita") == 0)) {
+            strcpy(rocha_m->categoria, "Aquaterra");
+        } 
+        else if ((strcmp(lista_e->item_e[0].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[1].nome, "Ferrolita") == 0) ||(strcmp(lista_e->item_e[1].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0)) {
+            strcpy(rocha_m->categoria, "Aquaferro");
+        }
+        else if ((strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0 && strcmp(lista_e->item_e[1].nome, "Solarium") == 0) || (strcmp(lista_e->item_e[1].nome, "Ferrolita") == 0 && strcmp(lista_e->item_e[0].nome, "Solarium") == 0)) {
+            strcpy(rocha_m->categoria, "Terrasol");
+        }
+        else if ((strcmp(lista_e->item_e[0].nome, "Calaris") == 0 && strcmp(lista_e->item_e[1].nome, "Terranita") == 0) || (strcmp(lista_e->item_e[1].nome, "Calaris") == 0 && strcmp(lista_e->item_e[0].nome, "Terranita") == 0)) {
+            strcpy(rocha_m->categoria, "Terrolis");
+        } 
+         else if ((strcmp(lista_e->item_e[0].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[1].nome, "Calaris") == 0) || (strcmp(lista_e->item_e[1].nome, "Aquavitae") == 0 && strcmp(lista_e->item_e[0].nome, "Calaris") == 0)) {
+            strcpy(rocha_m->categoria, "Calquer");
+        } 
+        else if ((strcmp(lista_e->item_e[0].nome, "Solarium") == 0 && strcmp(lista_e->item_e[1].nome, "Ferrolita") == 0) || (strcmp(lista_e->item_e[1].nome, "Solarium") == 0 && strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0)) {
+            strcpy(rocha_m->categoria, "Solarisfer");
+        }
+        else if ((strcmp(lista_e->item_e[0].nome, "Terranita") == 0 && strcmp(lista_e->item_e[1].nome, "Ferrolita") == 0) || (strcmp(lista_e->item_e[1].nome, "Terranita") == 0 && strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0)) {
+            strcpy(rocha_m->categoria, "Terralis");
+        }
+        else {
+            strcpy(rocha_m->categoria, "Sem Categoria");
         }
     }
-    if (j == 2)
-    {
-        if (strcmp(lista_e->item_e[0].nome, "Terranita") == 0 || (strcmp(lista_e->item_e[1].nome, "Terranita")) == 0)
-        {
-            if (strcmp(lista_e->item_e[0].nome, "Calaris") == 0 || (strcmp(lista_e->item_e[1].nome, "Calaris")) == 0){
-                strcpy(categoria,"Terrolis");
-                
-            }
-            else if (strcmp(lista_e->item_e[0].nome, "Solarium") == 0 || (strcmp(lista_e->item_e[1].nome, "Solarium")) == 0){
-                strcpy(categoria,"Terrasol");
-            }
-            else if (strcmp(lista_e->item_e[0].nome, "Aquavitae") == 0 || (strcmp(lista_e->item_e[1].nome, "Aquavitae")) == 0){
-                strcpy(categoria,"Aquaterra");
-                
-            }
-            else if (strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0 || (strcmp(lista_e->item_e[1].nome, "Ferrolita")) == 0){
-                strcpy(categoria,"Terralis");
-                
-            }
-        }
-        if (strcmp(lista_e->item_e[0].nome, "Aquavitae") == 0 || (strcmp(lista_e->item_e[1].nome, "Aquavitae") == 0)){
-            if(strcmp(lista_e->item_e[0].nome, "Calaris") == 0 || (strcmp(lista_e->item_e[1].nome, "Calaris")) == 0){
-                strcpy(categoria,"Calquer");
-                
-            }
-        }
-        if (strcmp(lista_e->item_e[0].nome, "Ferrolita") == 0 || (strcmp(lista_e->item_e[1].nome, "Ferrolita")) == 0){
-            if (strcmp(lista_e->item_e[0].nome, "Solarium") == 0 || (strcmp(lista_e->item_e[1].nome, "Solarium")) == 0){
-                strcpy(categoria,"Solarisfer");
-                
-            }
-        }   
-    }
-    if (j == 3) {
-        strcpy(categoria,"Aquacalis");
-    }
-    printf("%s",categoria);
-    
-    return categoria;
+    printf("%s",rocha_m->categoria);
 }
 
 
