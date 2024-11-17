@@ -2,19 +2,13 @@
 #include <stdlib.h>
 #include "Sonda.h"
 
-TSonda Inicializar_sonda(TSonda* sonda, float latitude, float longitude,float capacidade){
+void Inicializar_sonda(TSonda *sonda, float latitude, float longitude,float capacidade){
     Liga(sonda);
     FazId(sonda);
-
-    TLista compartimento;
-    FLVazia(&compartimento);
-    
-    setCompartimento(sonda, &compartimento);
     setLatitude(sonda, latitude);
     setLongitude(sonda, longitude);
     setCapacidade(sonda,capacidade);
     
-    return *sonda;
 }
 
 int Liga(TSonda* sonda){

@@ -19,11 +19,11 @@ void setidentificador(Trocha *rocha, int identificador);
 void setpeso(Trocha *rocha, float peso);
 void setlatitude(Trocha *rocha, float latitude);
 void setlongitude(Trocha *rocha, double longitude);
-void SetCategoria(Trocha*rocha,char* categoria);
+
 
 void classifica_categoria(L_entrada* lista_e, Trocha * rocha_m);
 
-Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude, char* categoria);
+Trocha InicializaRocha(Trocha *rocha, int identificador, float peso, float latitude, float longitude);
 
 int getidentificador(Trocha* rocha);
 float getpeso(Trocha* rocha);

@@ -28,5 +28,4 @@ float MediaSondas(Lista_s* lista_sonda);
 void PosicaoInicial(Lista_s* lista_sonda);
 int ContemCategoria(TSonda *sonda, const char *categoria, float pesoMinimo);
 
-int LogicaEuclides(Lista_s *lista_sonda, TSonda* sonda, float longitude, float latitude, TSonda** sonda_prox);
 TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha);

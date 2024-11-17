@@ -1,20 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "compartimento.h"
 
-void FLVazia(TLista *pLista){
-    pLista->pPrimeiro = (Apontador) malloc(sizeof(Tcelula));
+void FLVazia(TLista* pLista){
+
+    pLista->pPrimeiro = (Apontador)malloc(sizeof(Tcelula));
     pLista->pUltimo = pLista->pPrimeiro;
     pLista->pPrimeiro->pProx = NULL;
 } 
 int LEHVazia(TLista* pLista){
-    return(pLista->pPrimeiro->pProx == pLista->pUltimo);
+    return (pLista->pPrimeiro == pLista->pUltimo);
 }
 int LInsere(TLista* pLista, Trocha* pRocha ){
-    pLista->pUltimo->pProx = (Apontador) malloc(sizeof(Tcelula));
-    pLista->pUltimo = pLista->pUltimo->pProx;
-    pLista->pUltimo->rocha= *pRocha;
-    pLista->pUltimo->pProx = NULL;
+    Apontador novarocha= (Apontador)malloc(sizeof(Tcelula));
+
+    strcpy(novarocha->rocha.categoria,pRocha->categoria);
+    novarocha->rocha.peso=pRocha->peso;
+    novarocha->rocha.latitude=pRocha->latitude;
+    novarocha->rocha.longitude= pRocha->longitude;
+    pLista->pUltimo->pProx = novarocha;
+    novarocha->pProx=NULL;
+    pLista->pUltimo=novarocha;
 }
 int LRetita(TLista* pLista, Trocha* pRocha){
     Tcelula* pAux;
@@ -31,12 +38,7 @@ void LImprime(TLista* pLista){
     Apontador pAux;
     pAux = pLista->pPrimeiro->pProx;
     while (pAux!=NULL){
-        printf("==============================\n");
-        printf("%s\n", pAux->rocha.categoria);
-        printf("%d\n", pAux->rocha.identificador);
-        printf("%.2f\n", pAux->rocha.peso);
-        printf("%.2f\n", pAux->rocha.latitude);
-        printf("%.2f\n", pAux->rocha.longitude);
+        printf("%s %.2f\n", pAux->rocha.categoria, pAux->rocha.peso);
         pAux= pAux->pProx;
     }
 }
