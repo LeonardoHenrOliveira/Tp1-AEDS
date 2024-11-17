@@ -32,14 +32,16 @@ int main() {
             FILE * arquivo = NULL;
             arquivo = fopen("arquivo.txt", "r");
             if (arquivo == NULL) {
-                perror("Erro ao abrir o arquivo");
+                printf("erro ao alocar");
             }
+            
             int l=0;
             int quntdsondas, quntdoperacoes;
-            fscanf(arquivo, "%d", &quntdsondas); // Ler número de sondas
+            fscanf(arquivo, "%d", &quntdsondas); 
+            
             FLVazia_s(&lista_sonda);
 
-            // Ler as informações das sondas
+           
             for (int k = 0; k < quntdsondas; k++) {
                 TSonda Nsonda;
                 float lat, lon, capacidade, velocidade, combustivel;
@@ -47,12 +49,11 @@ int main() {
                 Inicializar_sonda(&Nsonda, lat, lon, capacidade);
                 LInsere_s(&lista_sonda, &Nsonda);
             }
-
-            fscanf(arquivo, "%d", &quntdoperacoes); // Ler número de operações
+            fscanf(arquivo, "%d", &quntdoperacoes); 
             char operacao;
             TLista lista_temp;
             FLVazia(&lista_temp);
-
+            
             for (int i = 0; i < quntdoperacoes; i++) {
                 fscanf(arquivo, " %c", &operacao);
 
@@ -60,14 +61,13 @@ int main() {
                     float latitude, longitude;
                     int peso;
                     char minerais_entrada[255];
-                    fscanf(arquivo, "%f %f %d %[^\n]", &latitude, &longitude, &peso, minerais_entrada);
+                    fscanf(arquivo, "%f %f %d ", &latitude, &longitude, &peso, minerais_entrada);
 
-            // Processar minerais
                     L_entrada lista_e;
                     FLvazia_e(&lista_e);
                     char* token = strtok(minerais_entrada, " ");
                     while (token != NULL) {
-                        entradaminerais m1 = InicializarMinerale(NULL, token);
+                        entradaminerais m1 = InicializarMinerale(&entradam, token);
                         LInsere_e(&lista_e, m1);
                         token = strtok(NULL, " ");
                         l++;
@@ -88,14 +88,8 @@ int main() {
                     printf("Operação inválida no arquivo\n");
                 }
     
-    fclose(arquivo);
-}
-
-
-
-
-
-
+            fclose(arquivo);
+        }
 
     }
     else if (escolha==2){
