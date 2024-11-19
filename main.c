@@ -22,6 +22,7 @@ int main() {
     entradaminerais entradam;
     TLista comp;
     L_entrada lista_e;
+    
 
 
     printf("Escolha se o codigo será rodado pela entrada do terminal ou de um arquivo txt:\n(1)=arquivo\n(2)=terminal\n");
@@ -38,7 +39,7 @@ int main() {
             int l=0;
             int quntdsondas, quntdoperacoes;
             fscanf(arquivo, "%d", &quntdsondas); 
-            
+            FLvazia_e(&lista_e);
             FLVazia_s(&lista_sonda);
 
            
@@ -49,6 +50,7 @@ int main() {
                 Inicializar_sonda(&Nsonda, lat, lon, capacidade);
                 LInsere_s(&lista_sonda, &Nsonda);
             }
+            
             fscanf(arquivo, "%d", &quntdoperacoes); 
             char operacao;
             TLista lista_temp;
@@ -65,6 +67,7 @@ int main() {
                     while ((ch = fgetc(arquivo)) != '\n' && ch != EOF);
                     fgets(entrada, 255, arquivo);
                     entrada[strcspn(entrada, "\n")] = '\0';
+                    printf("%s",entrada);
 
                     token = strtok(entrada,s);
                     latitude = atof(token);
@@ -81,7 +84,6 @@ int main() {
                             l++;
                         }       
                     }
-
                     Trocha rnova;
                     classifica_categoria(&lista_e, &rnova,l );
                     Trocha rocha = InicializaRocha(&rnova, 1, peso, latitude, longitude);

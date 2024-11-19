@@ -10,6 +10,7 @@ int LInsere_e(L_entrada* lista_e, entradaminerais y){
     if(lista_e->ultimoe==maxentrada){
         return 0;
     }
+    printf("aqui");
     lista_e->item_e[lista_e->ultimoe++] = y;
     return 1;
 }
