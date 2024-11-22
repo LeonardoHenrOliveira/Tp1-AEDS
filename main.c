@@ -86,10 +86,10 @@ int main() {
                     }
                     Trocha rnova;
                     classifica_categoria(&lista_e, &rnova,l );
+                    Lretira_e(&lista_e);
                     Trocha rocha = InicializaRocha(&rnova, 1, peso, latitude, longitude);
                     TSonda* sonda = Calculo_sonda_prox(&lista_sonda, &rocha);
                     LInsere(&sonda->compartimento, &rocha);
-                    Lretira_e(&lista_e);
 
                 } else if (operacao == 'I') {
                     Operacao_i(&lista_sonda);
