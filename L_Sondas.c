@@ -65,9 +65,8 @@ TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
             sondaProx = sonda_s;
         }
 
-        if((sonda_s->capacidade < rocha->peso) || (ContemCategoria(sonda_s, rocha->categoria, percorrer(sonda_s->compartimento, rocha->categoria)))){
+        if((sonda_s->capacidade <= rocha->peso)){
             usando = usando->pProx;
-            continue;
         }
 
         distancia = sqrt(pow(lat - sonda_s->Latitude, 2) + pow(longt - sonda_s->Longitude, 2));
@@ -79,7 +78,6 @@ TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
 
 
         sonda_s->capacidade -= rocha->peso;
-        sonda_s->peso += rocha->peso;
         usando = usando->pProx;
     }
 
@@ -132,9 +130,11 @@ float MediaSondas(Lista_s* lista_sonda){
 
 void retiraRochas(TSonda* sonda, TLista* temp_lista, float media){
     Apontador pAux;
+    TLista* aux2;
     pAux = sonda->compartimento.pPrimeiro->pProx;
+    aux2 = &sonda->compartimento;
     while (pAux!=NULL){
-        if(sonda->peso > media){
+        if(sonda->peso > media && maisItem(aux2)){
             sonda->peso -= pAux->rocha.peso;
             Trocha* rocha_temp = &pAux->rocha;
             LInsere(temp_lista, rocha_temp);
@@ -189,12 +189,10 @@ void OperacaoE(Lista_s* lista_sonda){
     if(!(LEHVazia(&lista_temp))){
 
         while(!(LEHVazia(&lista_temp))){
-            pAux = lista_sonda->pPrimeiro_s->pProx;
 
-            while(pAux != NULL){
                 printf("\nDENTRO DO SOBRA\n");
 
-                    if(!(LEHVazia(&pAux->item.compartimento)) && pAux->item.peso < media){
+                    if((LEHVazia(&pAux->item.compartimento)) || pAux->item.peso < media){
                         pAux->item.peso += lista_temp.pPrimeiro->pProx->rocha.peso;
                         LInsere(&pAux->item.compartimento, &lista_temp.pPrimeiro->pProx->rocha);
                         LRetira(&lista_temp, &lista_temp.pPrimeiro->pProx->rocha);
@@ -202,13 +200,28 @@ void OperacaoE(Lista_s* lista_sonda){
 
                 }
                 pAux = pAux->pProx;
-            }
+            
         }
         
     }
 
     printf("\n\nMEDIA: %.2f\n\n", media);
 
+}
+
+int maisItem(TLista* comp){
+    int test;
+    test = 0; 
+    Tcelula* pAux;
+    pAux = comp->pPrimeiro->pProx;
+    while (pAux != NULL){
+        test += 1;
+        pAux = pAux->pProx;
+    }
+    if(test > 1){
+        return 1;
+    }
+    return 0;
 }
 
 
@@ -232,3 +245,40 @@ void Operacao_i(Lista_s *lista_sonda){
         }
     printf("\n======================================\n");
 }
+
+
+/*
+    pAux = lista_sonda->pPrimeiro_s->pProx;
+
+    while(!(LEHVazia(&lista_temp))){
+
+        printf("\nDENTRO DO SOBRA\n");
+
+        if(!(LEHVazia(&lista_temp))){
+
+            pAux_2 = lista_sonda->pPrimeiro_s->pProx;
+            while(pAux_2 != NULL){
+                if(sonda_temp == NULL){
+                    sonda_temp = &pAux_2->item;
+                    pAux_2 = pAux_2->pProx;
+                    continue;
+                }
+                else if((pAux_2->item.capacidade < pAux_2->item.capacidade) && pAux_2->item.peso < media){
+                    sonda_temp = &pAux_2->item;
+                }
+                printf("\nRIMEIRO: %d", sonda_temp->capacidade);
+
+                pAux_2 = pAux_2->pProx;
+
+            }
+            sonda_temp->peso += lista_temp.pPrimeiro->pProx->rocha.peso;
+            printf("\nSEGUNDO: %d", sonda_temp->capacidade);
+            sonda_temp->peso += lista_temp.pPrimeiro->rocha.peso;
+            LInsere(&sonda_temp->compartimento, &lista_temp.pPrimeiro->pProx->rocha);
+            LRetira(&lista_temp, &lista_temp.pPrimeiro->pProx->rocha);
+                
+        }
+        pAux = pAux->pProx;
+            
+    }
+    */
