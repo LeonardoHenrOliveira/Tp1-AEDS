@@ -23,6 +23,8 @@ void LImprime_s(Lista_s* lista_sonda);
 float percorrer(TLista comp, char* cat);
 void retiraRochas(TSonda* sonda, TLista* temp_lista, float media);
 void voltarRocha(TSonda* sonda, TLista* temp_lista, float media);
+int maisItem(TLista* comp);
+void reduz_capacidade(TSonda* sonda, Trocha* rocha);
 
 void Operacao_i(Lista_s* lista_sonda);
 void OperacaoE(Lista_s* lista_sonda);

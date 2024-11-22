@@ -90,6 +90,7 @@ int main() {
                     Trocha rocha = InicializaRocha(&rnova, 1, peso, latitude, longitude);
                     TSonda* sonda = Calculo_sonda_prox(&lista_sonda, &rocha);
                     LInsere(&sonda->compartimento, &rocha);
+                    reduz_capacidade(sonda,&rocha);
 
                 } else if (operacao == 'I') {
                     Operacao_i(&lista_sonda);
@@ -156,7 +157,8 @@ int main() {
                 Trocha r1 = InicializaRocha(&rnova,1, peso, latitude, longitude);
                 TSonda *sondamaisprox = Calculo_sonda_prox(&lista_sonda, &rnova);
                 LInsere(&sondamaisprox->compartimento,&rnova);
-            
+                reduz_capacidade(sondamaisprox,&r1);
+
                 
             }
             else if (operacao== 'I'){
