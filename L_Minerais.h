@@ -27,6 +27,7 @@ int LInsere_m(L_Minerais* lista_m, Minerais x);
 int Lretira_m(L_Minerais* lista_m, int p, Minerais *px);
 void LImprime_m(L_Minerais* lista_m);
 
+int LEhVazia_e(L_entrada* lista_m);
 void FLvazia_e(L_entrada* lista_e);
 int LInsere_e(L_entrada* lista_e, entradaminerais y);
 void LImprime_e(L_entrada* lista_e);

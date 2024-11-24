@@ -55,7 +55,7 @@ void reduz_capacidade(TSonda* sonda,Trocha* rocha){
 
 TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
     TSonda *sondaProx = NULL;
-    float m_distancia = 10000000000000; 
+    float m_distancia = FLT_MAX; 
     float distancia = 0;
     float longt = rocha->longitude; 
     float lat = rocha->latitude;
@@ -64,29 +64,25 @@ TSonda* Calculo_sonda_prox(Lista_s *lista_sonda, Trocha *rocha) {
 
     while (usando!= NULL){
         TSonda *sonda_s = &usando->item;
-
+        printf("\nANTES\n");
         if(sondaProx == NULL){
             sondaProx = sonda_s;
         }
 
-        if((sonda_s->capacidade <= rocha->peso)){
-            usando = usando->pProx;
-        }
-
         distancia = sqrt(pow(lat - sonda_s->Latitude, 2) + pow(longt - sonda_s->Longitude, 2));
 
-        if (distancia < m_distancia ){
+        if (distancia < m_distancia && sonda_s->capacidade >= rocha->peso){
             m_distancia = distancia;
             sondaProx = sonda_s;
         }
 
-
-        sonda_s->capacidade -= rocha->peso;
         usando = usando->pProx;
     }
+    sondaProx->capacidade = sondaProx->capacidade - rocha->peso;
 
+    printf("\nDEPOIS\n");
 
-    Move(sondaProx,rocha->latitude,rocha->longitude);
+    Move(sondaProx, rocha->latitude, rocha->longitude);
     printf("\n");
     printf("\n++++ Coleta realizada com sucesso! ++++\n");
     printf("Sonda: %d\n", sondaProx->Identificador);
@@ -136,10 +132,11 @@ void retiraRochas(TSonda* sonda, TLista* temp_lista, float media){
     TLista* aux2;
     pAux = sonda->compartimento.pPrimeiro->pProx;
     aux2 = &sonda->compartimento;
-    while (pAux!=NULL){
+    while (pAux!=NULL && sonda->peso > media ){
         if(sonda->peso > media && maisItem(aux2)){
             sonda->peso -= pAux->rocha.peso;
             Trocha* rocha_temp = &pAux->rocha;
+            sonda->capacidade += rocha_temp->peso;
             LInsere(temp_lista, rocha_temp);
             LRetira(&sonda->compartimento, rocha_temp);
         }
@@ -153,7 +150,9 @@ void voltarRocha(TSonda* sonda, TLista* temp_lista, float media){
 
     while (pAux!=NULL){
         if((sonda->peso < media && sonda->capacidade > pAux->rocha.peso)){
+            
             sonda->peso += pAux->rocha.peso;
+            sonda->capacidade -= pAux->rocha.peso;
             LInsere(&sonda->compartimento, &pAux->rocha);
             LRetira(temp_lista, &pAux->rocha);
             printf("\nDentro17\n");
@@ -171,14 +170,12 @@ void OperacaoE(Lista_s* lista_sonda){
     FLVazia(&lista_temp);
     media = MediaSondas(lista_sonda);
 
-    printf("fora\n");
     while (pAux!=NULL){
         Move(&pAux->item, 0, 0);
         retiraRochas(&pAux->item, &lista_temp, media);
         pAux = pAux->pProx;
     }
 
-    printf("fora22\n");
 
     if(!(LEHVazia(&lista_temp))){
         pAux = lista_sonda->pPrimeiro_s->pProx;
@@ -188,24 +185,26 @@ void OperacaoE(Lista_s* lista_sonda){
         }
     }
 
-    pAux = lista_sonda->pPrimeiro_s->pProx;
-    if(!(LEHVazia(&lista_temp))){
+    while(!(LEHVazia(&lista_temp))){
+        pAux = lista_sonda->pPrimeiro_s->pProx;
+        TSonda *sondaMenosPesada;
+        printf("\nDENTRO DO SOBRA\n");
+        sondaMenosPesada = NULL;
 
-        while(!(LEHVazia(&lista_temp))){
-
-                printf("\nDENTRO DO SOBRA\n");
-
-                    if((LEHVazia(&pAux->item.compartimento)) || pAux->item.peso < media){
-                        pAux->item.peso += lista_temp.pPrimeiro->pProx->rocha.peso;
-                        LInsere(&pAux->item.compartimento, &lista_temp.pPrimeiro->pProx->rocha);
-                        LRetira(&lista_temp, &lista_temp.pPrimeiro->pProx->rocha);
-                    
-
-                }
-                pAux = pAux->pProx;
-            
+        while(pAux != NULL){
+            if(sondaMenosPesada == NULL){
+                sondaMenosPesada = &pAux->item;
+            }
+            if(sondaMenosPesada->capacidade < pAux->item.capacidade){
+                sondaMenosPesada = &pAux->item;
+            }
+            pAux = pAux->pProx;
         }
-        
+
+        sondaMenosPesada->capacidade -= lista_temp.pPrimeiro->pProx->rocha.peso;
+        LInsere(&sondaMenosPesada->compartimento, &lista_temp.pPrimeiro->pProx->rocha);
+        LRetira(&lista_temp, &lista_temp.pPrimeiro->pProx->rocha);
+          
     }
 
     printf("\n\nMEDIA: %.2f\n\n", media);
@@ -236,6 +235,7 @@ void Operacao_i(Lista_s *lista_sonda){
         printf("\n======================================\n");
         printf("\nID: %d\n", sonda_2->Identificador);
         printf("Localizacao:(%.2f,%.2f)\n",sonda_2->Latitude,sonda_2->Longitude);
+        printf("CAPACIDADE:(%.2f)\n", sonda_2->capacidade);
         printf("\n");
                 
         if(LEHVazia(&sonda_2->compartimento)){
@@ -248,40 +248,3 @@ void Operacao_i(Lista_s *lista_sonda){
         }
     printf("\n======================================\n");
 }
-
-
-/*
-    pAux = lista_sonda->pPrimeiro_s->pProx;
-
-    while(!(LEHVazia(&lista_temp))){
-
-        printf("\nDENTRO DO SOBRA\n");
-
-        if(!(LEHVazia(&lista_temp))){
-
-            pAux_2 = lista_sonda->pPrimeiro_s->pProx;
-            while(pAux_2 != NULL){
-                if(sonda_temp == NULL){
-                    sonda_temp = &pAux_2->item;
-                    pAux_2 = pAux_2->pProx;
-                    continue;
-                }
-                else if((pAux_2->item.capacidade < pAux_2->item.capacidade) && pAux_2->item.peso < media){
-                    sonda_temp = &pAux_2->item;
-                }
-                printf("\nRIMEIRO: %d", sonda_temp->capacidade);
-
-                pAux_2 = pAux_2->pProx;
-
-            }
-            sonda_temp->peso += lista_temp.pPrimeiro->pProx->rocha.peso;
-            printf("\nSEGUNDO: %d", sonda_temp->capacidade);
-            sonda_temp->peso += lista_temp.pPrimeiro->rocha.peso;
-            LInsere(&sonda_temp->compartimento, &lista_temp.pPrimeiro->pProx->rocha);
-            LRetira(&lista_temp, &lista_temp.pPrimeiro->pProx->rocha);
-                
-        }
-        pAux = pAux->pProx;
-            
-    }
-    */
